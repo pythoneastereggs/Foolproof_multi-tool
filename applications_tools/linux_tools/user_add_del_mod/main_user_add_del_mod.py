@@ -86,58 +86,111 @@ if user_input == 1:
             # έδώ απλός ο χρήστης θα μπορέσει να χρησημοποιήσει το κάθε ένα switch μόνο μια φορά 
             
             print("What do you whant to do with this new user?\n")
+            
             if flag_table["--badnames"] == False:
+                
                 print("1-bad names do not check for bad names")
+                
             if flag_table["--base-dir"] == False:
+
                 print("2-base directory for the home directory of the new account")
+
             if flag_table["--btrfs-subvolume-home"] == False:
+
                 print("3-use BTRFS subvolume for home directory")
+
             if flag_table["--comment"] == False:
+
                 print("4-GECOS field of the new account")
+
             if flag_table["--home-dir"] == False:
+
                 print("5-home directory of the new account")
+
             if flag_table["--defaults"] == False:
+
                 print("6-print or change default useradd configuration")
+
             if flag_table["--expiredate"] == False:
+
                 print("7-expiration date of the new account")
+
             if flag_table["--inactive"] == False:
+
                 print("8-password inactivity period of the new account")
+
             if flag_table["--gid"] == False:
+
                 print("9-name or ID of the primary group of the new account")
+
             if flag_table["--groups"] == False:
+
                 print("10-list of supplementary groups of the new account")
+
             if flag_table["--skel"] == False:
+
                 print("11-use this alternative skeleton directory")
+
             if flag_table["--key"] == False:
+
                 print("12-override /etc/login.defs defaults")
+
             if flag_table["--no-log-init"] == False:
+
                 print("13-do not add the user to the lastlog and faillog databases")
+
             if flag_table["--create-home"] == False:
+
                 print("14-create the user's home directory")
+
             if flag_table["--no-create-home"] == False:
+
                 print("15-do not create the user's home directory")
+
             if flag_table["--no-user-group"] == False:
+
                 print("16-do not create a group with the same name as the user")
+
             if flag_table["--non-unique"] == False:
+
                 print("17-allow to create users with duplicate (non-unique) UID")
+
             if flag_table["--password"] == False:
+
                 print("18-encrypted password of the new account")
+
             if flag_table["--system"] == False:
+
                 print("19-create a system account")
+
             if flag_table["--root"] == False:
+
                 print("20-directory to chroot into")
+
             if flag_table["--prefix"] == False:
+
                 print("21-prefix directory where are located the /etc/* files")
+
             if flag_table["--shell"] == False:
+
                 print("22-login shell of the new account")
+
             if flag_table["--uid"] == False:
+
                 print("23-user ID of the new account")
+
             if flag_table["--user-group"] == False:
+
                 print("24-create a group with the same name as the user")
+
             if flag_table["--selinux-user"] == False:
+
                 print("25-use a specific SEUSER for the SELinux user mapping")
+
             if flag_table["--extrausers"] == False:
+
                 print("26-Use the extra users database")
+
             print("0-to exit")
             
             users_inputs(user_input, 0, 26)
@@ -146,75 +199,140 @@ if user_input == 1:
             # λίστα (δεν είμαι βέβαιος για αν λέγεται λίστα ή κάτι άλλο) καθός και το switch αυτό θα προσθεθεί μόνο μια φορά
             # στο main_command
             if user_input == 0:
+
                 flag_continue=False
+
             elif user_input == 1 and flag_table["--badnames"] == False:
+
                 flag_table.update({"--badnames" : True})
+
                 main_command +=" --badnames"
+
             elif user_input == 2 and flag_table["--base-dir"] == False:
+
                 flag_table.update({"--base-dir" : True})
+
                 switch=str(input("gime a base directory for the home directory of the new account: "))
+
                 main_command = main_command + " --base-dir" + switch
+
             elif user_input == 3 and flag_table["--btrfs-subvolume-home"] == False:
+
                 flags_table.update({"--btrfs-subvolume-home" : True})
+
             elif user_input == 4 and flag_table["--comment"] == False:
+
                 flag_table.update({"--comment" : True})
+
                 main_command +=" --comment" + str(input("give me the comment for the new account:"))
+
             elif user_input == 5 and flag_table["--home-dir"] == False:
+
                 flag_table.update({"--home-dir" : True})
+
             elif user_input == 6 and flag_table["--defaults"] == False:
+
                 flag_table.update({"--defaults" : True})
+
             elif user_input == 7 and flag_table["--expiredate"] == False:
+
                 flag_table.update({"--expiredate" : True})
+
             elif user_input == 8 and flag_table["--inactive"] == False:
+
                 flag_table.update({"--inactive" : True})
+
             elif user_input == 9 and flag_table["--gid"] == False:
+
                 flag_table.update({"--gid" : True})
+
             elif user_input == 10 and flag_table["--groups"] == False:
+
                 flag_table.update({"--groups" : True})
+
             elif user_input == 11 and flag_table["--skel"] == False:
+
                 flag_table.update({"--skel" : True})
+
             elif user_input == 12 and flag_table["--key"] == False:
+
                 flag_table.update({"--key" : True})
+
             elif user_input == 13 and flag_table["--no-log-init"] == False:
+
                 flag_table.update({"--no-log-init" : True})
+
             elif user_input == 14 and flag_table["--create-home"] == False:
+
                 flag_table.update({"--create-home" : True})
+
             elif user_input == 15 and flag_table["--no-create-home"] == False:
+
                 flag_table.update({"--no-create-home" : True})
+
                 main_command +=" --no-create-home"
+
             elif user_input == 16 and flag_table["--no-user-group"] == False:
+
                 flag_table.update({"--no-user-group" : True})
+
                 main_command +=" --no-user-group"
+
             elif user_input == 17 and flag_table["--non-unique"] == False:
+
                 flag_table.update({"--non-unique" : True})
+
             elif user_input == 18 and flag_table["--password"] == False:
+
                 flag_table.update({"--password" : True})
+
                 main_command +=" --password " + str(input("gime the password for the account: "))
+
             elif user_input == 19 and flag_table["--system"] == False:
+
                 flag_table.update({"--system" : True})
+
                 main_command +=" --system"
+
             elif user_input == 20 and flag_table["--root"] == False:
+
                 flag_table.update({"--root" : True})
+
             elif user_input == 21 and flag_table["--prefix"] == False:
+
                 flag_table.update({"--prefix" : True})
+
             elif user_input == 22 and flag_table["--shell"] == False:
+
                 flag_table.update({"--shell" : True})
+
                 main_command +=" --shell "+ str(input("give me the shell that you want to use: "))
+
             elif user_input == 23 and flag_table["--uid"] == False:
+
                 flag_table.update({"--uid" : True})
+
             elif user_input == 24 and flag_table["--user-group"] == False:
+
                 flag_table.update({"--user-group" : True})
+
             elif user_input == 25 and flag_table["--selinux-user"] == False:
+
                 flag_table.update({"--selinux-user" : True})
+
             elif user_input == 26 and flag_table["--extrausers"] == False:
+
                 flag_table.update({"--extrausers" : True})
+
                 
         main_command +=" " + user_name + " && passwd " + user_name
         os.system(main_command)
         
     elif user_input == 3:
+        
         main_command = "man useradd"
         os.system(main_command)
+        
 elif user_input == 2:
     
     main_command+="mod"
