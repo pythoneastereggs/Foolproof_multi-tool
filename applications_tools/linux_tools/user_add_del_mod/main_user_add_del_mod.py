@@ -35,18 +35,18 @@ def flags_zero():
           "--user-group" : False, "--selinux-user" : False, "--extrausers" : False}
     #τα flags θα τα χρησιμοποιήσω στο να εμφανίζει στο terminal τα ανάλογα switches στον χρηστη.
     
-def users_inputs(users_input, start, finish): #general user's inputs
+def users_inputs(start, finish): #general user's inputs
     flag_continue=True
     while flag_continue:                                 
-        user_input = int(input("gime a number [1,3]:"))
+        user_input = int(input("gime a number ["+ str(start) + ","+ str(finish)+ "]:"))
         if user_input >= start and user_input <= finish:
             flag_continue=False
         else:
             print("wrong input please try again")
-    
+    return user_input
 
 main_command="sudo user"# τα useradd, userdel & usermod προαπετούν να τρέχουν σε super user (sudo ή root) για να τρέξουν και
-                        # να κάνουν αλαγλες στο σύστημα
+                        # να κάνουν αλαγες στο σύστημα
 
 print("""In dev release is not have the users automaticly displayed(????)
 probablly in the other versions will have all the modifyable users(???)\n\n""")
@@ -57,18 +57,17 @@ print("""what you want to do?
 2-modify a user?
 3-delete a user?""")
 
-users_inputs(users_input, 1, 3)
+user_input=users_inputs(1, 3)
 
 if user_input == 1:
     
     main_command+="add"# εδώ απλός ολοκληρώνω το command useradd
     user_name=str(input("gime a username that you want to add to the system: "))
     print("""1-procceed as all default
-2-manually control(???)
-3-manual of useradd command
+2-manually control(???) (manual of useradd command)
 """)
     
-    users_inputs(user_input, 1, 3)
+    user_input=users_inputs(1, 3)
 
     if user_input == 1:
           
@@ -77,6 +76,9 @@ if user_input == 1:
         os.system(main_command)# τρέχει το command στο terminal και δείχνει το output στον χρήστη
         
     elif user_input == 2:
+        
+        print("do you want help for the commands?(1-yes, 2-no)")
+        user_input=users_inputs(1, 2)
         
         flags_zero()
         
@@ -193,7 +195,7 @@ if user_input == 1:
 
             print("0-to exit")
             
-            users_inputs(user_input, 0, 26)
+            user_input=users_inputs(0, 26)
             
             # εδώ αν ο χρήστης επιλέξει ένα από αυτά τα switch θα το προσθεθεί στο main_command και θα κάνει update την ανάλογη
             # λίστα (δεν είμαι βέβαιος για αν λέγεται λίστα ή κάτι άλλο) καθός και το switch αυτό θα προσθεθεί μόνο μια φορά
@@ -212,23 +214,25 @@ if user_input == 1:
 
                 flag_table.update({"--base-dir" : True})
 
-                switch=str(input("gime a base directory for the home directory of the new account: "))
-
-                main_command = main_command + " --base-dir" + switch
+                main_command = main_command + " --base-dir " + str(input("Give a base directory for the home directory of the new account: "))
 
             elif user_input == 3 and flag_table["--btrfs-subvolume-home"] == False:
 
                 flags_table.update({"--btrfs-subvolume-home" : True})
+                
+                main_command+=" --btrfs-subvolume-home"
 
             elif user_input == 4 and flag_table["--comment"] == False:
 
                 flag_table.update({"--comment" : True})
 
-                main_command +=" --comment" + str(input("give me the comment for the new account:"))
+                main_command +=" --comment " + str(input("give me the comment for the new account:"))
 
             elif user_input == 5 and flag_table["--home-dir"] == False:
 
                 flag_table.update({"--home-dir" : True})
+                
+                main_command+=" --home-dir " + str(input("give me the home directory of the new account (e.g. /home/USER_NAME): "))
 
             elif user_input == 6 and flag_table["--defaults"] == False:
 
@@ -237,18 +241,64 @@ if user_input == 1:
             elif user_input == 7 and flag_table["--expiredate"] == False:
 
                 flag_table.update({"--expiredate" : True})
+                
+                print("""
+    The date on which the user account will be disabled. The date is
+    specified in the format YYYY-MM-DD.
+    
+    If not specified, useradd will use the default expiry date
+    specified by the EXPIRE variable in /etc/default/useradd, or an
+    empty string (no expiry) by default.""")
+                
+                main_command +=" --expiredate " + str(input("give me the expiredate for the new account YYYY-MM-DD: "))
 
             elif user_input == 8 and flag_table["--inactive"] == False:
-
+                
                 flag_table.update({"--inactive" : True})
+                
+                print("""
+    The number of days after a password expires until the account is
+    permanently disabled. A value of 0 disables the account as soon as
+    the password has expired, and a value of -1 disables the feature.
 
+    If not specified, useradd will use the default inactivity period
+    specified by the INACTIVE variable in /etc/default/useradd, or -1
+    by default.""")
+
+                main_command +=" --inactive " + str(input("Give me the days after a password expires: "))
+    
             elif user_input == 9 and flag_table["--gid"] == False:
+                print("""
+    The group name or number of the user's initial login group. The
+    group name must exist. A group number must refer to an already
+    existing group.
+
+    If not specified, the behavior of useradd will depend on the
+    USERGROUPS_ENAB variable in /etc/login.defs. If this variable is
+    set to yes (or -U/--user-group is specified on the command line), a
+    group will be created for the user, with the same name as her
+    loginname. If the variable is set to no (or -N/--no-user-group is
+    specified on the command line), useradd will set the primary group
+    of the new user to the value specified by the GROUP variable in
+    /etc/default/useradd, or 100 by default.\n""")
 
                 flag_table.update({"--gid" : True})
+                
+                main_command +=" --gid " + str(input("Give me a id or name of an already group name that must exist: "))
+                
 
             elif user_input == 10 and flag_table["--groups"] == False:
+                
+                print("""
+    A list of supplementary groups which the user is also a member of.
+    Each group is separated from the next by a comma, with no
+    intervening whitespace. The groups are subject to the same
+    restrictions as the group given with the -g option. The default is
+    for the user to belong only to the initial group.\n""")
 
                 flag_table.update({"--groups" : True})
+                
+                main_command +=" --groups " + str(input("Give me a GROUP1[,GROUP2,...[,GROUPN]]]: "))
 
             elif user_input == 11 and flag_table["--skel"] == False:
 
