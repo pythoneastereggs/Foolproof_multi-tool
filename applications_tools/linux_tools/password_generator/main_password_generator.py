@@ -5,6 +5,7 @@ from random import choice
 ###################################################################################################
 
 def users_inputs(start, finish): #general user's inputs
+    
     flag_continue=True # https://fixrelationshipnow.net/wp-content/uploads/2020/03/hello-there-general-kenobi.jpg
     while flag_continue:
         user_input = int(input("gime a number ["+ str(start) + ","+ str(finish)+ "]:"))
@@ -15,6 +16,7 @@ def users_inputs(start, finish): #general user's inputs
     return user_input
 
 def pass_lenght():
+    
     while True:
         pass_len=int(input("give me how many characters you want to have in your password (greater than 8): "))
         if pass_len >= 8:
@@ -32,6 +34,7 @@ user_input=users_inputs(0, 2)
 
 password=""
 if user_input == 1: # strong table
+    
     table_strong= "abcdefghigklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*(?)_+-=*/\'\";:[{]}.<,>|`~"
 
     pass_len=pass_lenght()
@@ -45,7 +48,7 @@ elif user_input == 2:
     table_lower="abcdefghigklmnopqrstuvwxyz"
     table_upper="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     table_numbers="0123456789"
-    table_special_char="`~!@#$%^&*)(-_=+{[}]\|\"\'/?.>,<"
+    table_special_char="`~!@#$%^&*)(-_=+}{][\|\"\'/?.>,<"
 
     flag_table_lower=False
     flag_table_upper=False
@@ -53,6 +56,7 @@ elif user_input == 2:
     flag_table_special_char=False
 
     while True:
+        # selectivly tables in whatever order
         if flag_table_lower == False:
             print("\n1-use lower")
         if flag_table_upper == False:
@@ -63,7 +67,7 @@ elif user_input == 2:
             print("4-use special characters")
         print("0-exit")
         user_input=users_inputs(0,4)
-
+# only once input a table and if the user doen't input a number [1,4] then the program  exits
         if user_input == 0:
             break
         elif user_input == 1:
@@ -78,6 +82,7 @@ elif user_input == 2:
             break
 
     if flag_table_upper or flag_table_lower or flag_table_numbers or flag_table_special_char:
+        # the final table assebly if atleast one table's falg is true
         final_table=""
         if flag_table_lower:
             final_table+=table_lower
@@ -87,7 +92,7 @@ elif user_input == 2:
             final_table+=table_numbers
         if flag_table_special_char:
             final_table+=table_special_char
-
+        # password lenght at least 8 characters
         pass_len=pass_lenght()
 
         for i in range(pass_len):
