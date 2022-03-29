@@ -4,9 +4,9 @@ import os
 #   δεν παίζει ρόλο αν είναι debian ή arch το σύστημα στο οποίο θα τρέξει το προγραμμα γιατί και τα δύο συστήματα
 #   έχουν τα usermod, userdel & useradd
 #####################################################################################################################################
-# command in terminal: man useradd usermod & userdel αντίστοιχα (man είναι το manual για κάθε πρόγραμμα που το έχει)                                             #
+# command in terminal: man useradd usermod & userdel αντίστοιχα (man είναι το manual για κάθε πρόγραμμα που το έχει)                #
 # ενμέρη βέβαια και ελάχειστα modified                                                                                              #
-#DESCRIPTIONS:                                                                                                                       #
+#DESCRIPTIONS:                                                                                                                      #
 #   useradd is a low level utility for adding users. On Debian, administrators should usually use adduser(8) instead.               #
 #                                                                                                                                   #
 #      When invoked without the -D option, the useradd command creates a new user account using the values specified on the command #
@@ -33,7 +33,9 @@ def flags_zero():
           "--no-create-home" : False, "--no-user-group" : False, "--non-unique" : False, "--password" : False, 
           "--system" : False, "--root" : False, "--prefix" : False, "--shell" : False, "--uid" : False, 
           "--user-group" : False, "--selinux-user" : False, "--extrausers" : False, "temp --base-dir" : False,
-          "temp --expiredate" : False, "temp --inactive" : False, "temp --gid" : False, "temp --shell" : False}
+          "temp --expiredate" : False, "temp --inactive" : False, "temp --gid" : False, "temp --shell" : False,
+          "--force" : False, "--remove" : False, "--root" : False, "--prefix" : False, "--extrausers" : False,
+          "--selinux-user" : False }
     #τα flags θα τα χρησιμοποιήσω στο να εμφανίζει στο terminal τα ανάλογα switches στον χρηστη.
     
 def users_inputs(start, finish): #general user's inputs
@@ -62,7 +64,7 @@ user_input=users_inputs(1, 3)
 
 if user_input == 1:
     
-    main_command+="add"# εδώ απλός ολοκληρώνω το command useradd
+    main_command+="add" # εδώ απλός ολοκληρώνω το command useradd
     user_name=str(input("gime a username that you want to add to the system: "))
     print("""1-procceed as all default
 2-manually control(???) (manual of useradd command)
@@ -85,7 +87,7 @@ if user_input == 1:
         elif user_input == 2:
             flag_help=False
         
-        flags_zero()
+        flag_table=flags_zero()
         
         flag_continue=True
         while flag_continue:
@@ -690,14 +692,37 @@ elif user_input == 2:
     user_name=str(input("gime a username that you want to modify from the system: "))
 
 elif user_input == 3:
+
     # basic command for now just a prototype for this section....
     # AKA comming soon...
     main_command += "del"
-    user_name = str(input("gime a username that you want to delete from the system: "))
-    main_command += " " + user_name
+    user_name=str(input("gime a username that you want to delete from the system: "))
+    
+    print("""1- Simple account dellition
+2- Configurable account delition
+""")
+
+    user_input=users_inputs(1,2)
+
+    if user_input == 1:
+        
+        main_command += " " + user_name
+
+    elif user_input == 2:
+
+        flag_table=flags_zero()
+        
+        while True:
+
+
+
+            user_input = users_inputs(0,7)
+
     os.system(main_command)
     
 print("end")
+
+
 # αυτά είναι τα options για το useradd το command που χρησημοποιήθηκε είναι: useradd --help
 #
 #useradd Options
