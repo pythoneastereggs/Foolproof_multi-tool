@@ -1,18 +1,33 @@
 import os
+from os import getcwd, system
 import configparser
 
 # το os.system(...) δημιουργεί ένα shell shell 
-os.system("bash -c \"source $(pwd)/applications-tools/linux-tools/tools/system_update/script.sh\"")
+system("bash -c \"source $(pwd)/applications-tools/linux-tools/tools/system_update/script.sh\"")
 #dependecies για update
-config = ConfigParser.ConfigParser()
-config.read("")
-based_on = config.get('', '')
-apt = config.get('', '')
-snap = config.get('', '')
-flatpak = config.get('', '')
-pacman = config.get('', '')
+config = configparser.ConfigParser()
+config.read(getcwd()+"/applications_tools/linux_tools/system_update/sys_update.ini")
+based_on = config.get('System_properties', 'distro_based')
+apt = config.get('System_properties', 'package_manager_apt')
+snap = config.get('System_properties', 'package_manager_snap')
+flatpak = config.get('System_properties', 'package_manager_flatpak')
+pacman = config.get('System_properties', 'package_manager_pacman')
 
-###########################
-# non working prototype!!!#
-###########################
-# 18/03/22 02:47 AM
+print("flags =", apt, snap, flatpak, pacman, based_on)
+
+if apt:
+    system("echo\"\" && echo \"updating\" && echo \"\" && sudo apt update && echo\"\" && echo \"upgrading\" && echo \"\" && sudo apt upgrade")
+
+if pacman:
+    system("echo\"\" && echo \"updating & upgrading\" && echo \"\" && sudo -Suuy")
+
+if flatpak:
+    system("echo\"\" && echo \"updating\" && echo \"\" && sudo flatpak update && echo\"\" && echo \"upgrading\" && echo \"\" && sudo flatpak upgrade")
+
+if snap:
+    system("echo\"\" && echo \"updating && echo\"\" && snap refresh")
+
+########################
+# working prototype!!! #
+########################
+# 28/03/22 10:42 PM

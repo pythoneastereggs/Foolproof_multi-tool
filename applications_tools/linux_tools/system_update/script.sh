@@ -53,10 +53,10 @@ fi
 # τα flag apt, pacman, snap και flatpak είναι για να δεει αν είναι εγκατεστημένο ή όχι το συγκεκριμένο package manager
 
 #εδώ γράφει στο sys_update.ini και σε config τυπου που μπορεί να διαβάσει η βιβλιοθίκη configparser
-# που θα χρησιμοποιηθεί ποιο μετά για να γίνει update στο σύστημα
-echo "[System_properties]" > $(pwd)/applications-tools/linux-tools/tools/system_update/sys_update.ini
-echo "distro_based = $distro_based" >> $(pwd)/applications-tools/linux-tools/tools/system_update/sys_update.ini
-echo "package_manager_apt = $flag_apt" >> $(pwd)/applications-tools/linux-tools/tools/system_update/sys_update.ini
-echo "package_manager_flatpak = $flag_flatpak" >> $(pwd)/applications-tools/linux-tools/tools/system_update/sys_update.ini
-echo "package_manager_snap = $flag_snap" >> $(pwd)/applications-tools/linux-tools/tools/system_update/sys_update.ini
-echo "package_manager_pacman = $flag_pacman" >> $(pwd)/applications-tools/linux-tools/tools/system_update/sys_update.ini
+# που θα χρησιμοποιηθεί ποιο μετά για να γίνει update στο σύστημα & για το install packages
+echo "[System_properties]" > $(pwd)/applications_tools/linux_tools/system_update/sys_update.ini
+echo "distro_based = $distro_based" >> $(pwd)/applications_tools/linux_tools/system_update/sys_update.ini
+echo "package_manager_apt = $flag_apt" >> $(pwd)/applications_tools/linux_tools/system_update/sys_update.ini
+echo "package_manager_flatpak = $flag_flatpak" >> $(pwd)/applications_tools/linux_tools/system_update/sys_update.ini
+echo "package_manager_snap = $flag_snap" >> $(pwd)/applications_tools/linux_tools/system_update/sys_update.ini
+echo "package_manager_pacman = $flag_pacman" >> $(pwd)/applications_tools/linux_tools/system_update/sys_update.ini
