@@ -94,7 +94,7 @@ while True:
              Result = ammount*0.052120939
          else:
              print("Λάθος επιλογή") 
-    print("Το μετατροποιημένο πόσο είναι", Result)          
+    print("Το μετατροποιημένο ποσό είναι", Result)          
           
              
              
