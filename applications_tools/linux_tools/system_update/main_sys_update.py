@@ -15,16 +15,16 @@ pacman = config.get('System_properties', 'package_manager_pacman')
 
 print("flags =", apt, snap, flatpak, pacman, based_on)
 
-if apt:
+if apt == True:
     system("echo\"\" && echo \"updating\" && echo \"\" && sudo apt update && echo\"\" && echo \"upgrading\" && echo \"\" && sudo apt upgrade")
 
-if pacman:
+if pacman == True:
     system("echo\"\" && echo \"updating & upgrading\" && echo \"\" && sudo -Suuy")
 
-if flatpak:
+if flatpak == True:
     system("echo\"\" && echo \"updating\" && echo \"\" && sudo flatpak update && echo\"\" && echo \"upgrading\" && echo \"\" && sudo flatpak upgrade")
 
-if snap:
+if snap == True:
     system("echo\"\" && echo \"updating && echo\"\" && snap refresh")
 
 ########################
