@@ -19,7 +19,7 @@ if apt == "True":
     system("echo\"\" && echo \" apt updating\" && echo \"\" && sudo apt update && echo\"\" && echo \"apt upgrading\" && echo \"\" && sudo apt upgrade")
 
 if pacman == "True":
-    system("echo\"\" && echo \"pacman updating & upgrading\" && echo \"\" && sudo pacman -Suuy")
+    system("echo\"\" && echo \"pacman updating & upgrading\" && echo \"\" && sudo pacman -Suyy")
 
 if flatpak == "True":
     system("echo\"\" && echo \"flatpak updating\" && echo \"\" && sudo flatpak update && echo\"\" && echo \"flatpak upgrading\" && echo \"\" && sudo flatpak upgrade")
