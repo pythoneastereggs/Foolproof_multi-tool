@@ -4,14 +4,14 @@ from random import choice
 # ένα πρόγραμμα το οποίο προσομοιώνει τη ρίψη ενός κέρματος #
 #############################################################
 
-print("Do you want to flip the coin? ")
 win_counter=0
 lose_counter=0
 list = ['T','H']
+print("Do you want to flip the coin? ")
 answer=str(input("'YES' or 'NO'?: "))
 while answer == 'YES':                    #Επανάληψη της ρίψης με εντολή του χρήστη
     if answer == 'YES':
-        user_choice = str(input("Choose one letter 'T' for tails or 'H' for heads : "))
+        user_choice = str(input("Choose one letter 'T' for tails or 'H' for heads: "))
         result = choice(list)
         if result == 'T':
             print("Tails.")
