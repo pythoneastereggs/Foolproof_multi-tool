@@ -1,29 +1,31 @@
 from random import choice
 
-##############################################################
+#############################################################
 # ένα πρόγραμμα το οποίο προσομοιώνει τη ρίψη ενός κέρματος #
-##############################################################
-print("Θέλεις να ρίξεις το κέρμα; ")
-c_w=0
-c_l=0
-answer=str(input("'ΝΑΙ' Ή 'ΟΧΙ'; : "))
-while answer=='ΝΑΙ':
-    if answer=='NAI':
-        list = ['Γ','Κ']
-        user_choice = str(input("Επίλεξε ένα γράμμα 'Γ' για γράμματα ή 'Κ' για κορώνα : "))
+#############################################################
+
+print("Do you want to flip the coin? ")
+win_counter=0
+lose_counter=0
+list = ['T','H']
+answer=str(input("'YES' or 'NO'?: "))
+while answer == 'YES':                    #Επανάληψη της ρίψης με εντολή του χρήστη
+    if answer == 'YES':
+        user_choice = str(input("Choose one letter 'T' for tails or 'H' for heads : "))
         result = choice(list)
-        if result == 'Γ':
-            print("Γράμματα.")
-        elif result == 'Κ':
-            print("Κορώνα.")
+        if result == 'T':
+            print("Tails.")
+        elif result == 'H':
+            print("Heads.")
         if result == user_choice:
-            print("Σωστό, κέρδισες!")
-            c_w=c_w+1
+            print("Correct, you won!")
+            win_counter=win_counter+1
         else:
-            print("Λάθος, έχασες!")
-            c_l=c_l+1
-    answer = str(input("'ΝΑΙ' Ή 'ΟΧΙ'; : "))
-print("Κλείσιμο παιχνιδιού")
+            print("Wrong, you lose!")
+            lose_counter=lose_counter+1
+    answer = str(input("'YES' or 'NO'?: "))
+print("Total Wins:",win_counter)
+print("Total Loses:",lose_counter)
+print("Terminate Game")
 
 # Καμία πρόταση για διόρθωση;
-
