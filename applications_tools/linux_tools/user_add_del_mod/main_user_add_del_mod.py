@@ -26,7 +26,7 @@ import os
 def flags_zero():
 # Μπορεί να χρειαστώ να μηδενήσω τα flags για το usermod 
     # γενικά αυτά είναι τα switches που μπορεις να έχει για τα useradd, userdel & usermod
-    # προς το παρών είναι μόνο για το useradd (aka comming soon)
+    # προς το παρών είναι μόνο για τα useradd & userdell (aka comming soon for usermod)
     flag_table={"--badnames" : False, "--base-dir" : False, "--btrfs-subvolume-home" : False, "--comment" : False,
           "--home-dir" : False, "--defaults" : False, "--expiredate" : False, "--inactive" : False, "--gid" : False,
           "--groups" : False, "--skel" : False, "--key" : False, "--no-log-init" : False, "--create-home" : False, 
@@ -34,8 +34,8 @@ def flags_zero():
           "--system" : False, "--root" : False, "--prefix" : False, "--shell" : False, "--uid" : False, 
           "--user-group" : False, "--selinux-user" : False, "--extrausers" : False, "temp --base-dir" : False,
           "temp --expiredate" : False, "temp --inactive" : False, "temp --gid" : False, "temp --shell" : False,
-          "--force" : False, "--remove" : False, "--root" : False, "--prefix" : False, "--extrausers" : False,
-          "--selinux-user" : False }
+          "usrD--force" : False, "usrD--remove" : False, "usrD--root" : False, "usrD--prefix" : False, "usrD--extrausers" : False,
+          "usrD--selinux-user" : False }
     #τα flags θα τα χρησιμοποιήσω στο να εμφανίζει στο terminal τα ανάλογα switches στον χρηστη.
     
 def users_inputs(start, finish): #general user's inputs
@@ -709,14 +709,121 @@ elif user_input == 3:
         main_command += " " + user_name
 
     elif user_input == 2:
+        
+        user_input=users_inputs(1, 2)
+        if user_input == 1:
+            flag_help=True
+            print("userdel [options] LOGIN")
+        elif user_input == 2:
+            flag_help=False
+        
 
         flag_table=flags_zero()
-        
+
+        print        
         while True:
+            if flag_table["usrD--force"] == False:
+                print("1-force removal of files, even if not owned by user")
 
+            if flag_table["usrD--remove"] == False:
+                print("2-remove home directory and mail spool")
 
+            if flag_table["usrD--root"] == False:
+                print("3-directory to chroot into")
 
-            user_input = users_inputs(0,7)
+            if flag_table["usrD--prefix"] == False:
+                print("4-prefix directory where are located the /etc/* files")
+
+            if flag_table["usrD--selinux-user"] == False:
+                print("5-remove any SELinux user mapping for the user")
+
+            print("0-exit and run the command")
+
+            user_input = users_inputs(0,5)
+
+            if user_input == 1 and flag_table["userD--force"] == False:
+                flag_table["userD--force"] = True
+                
+                if flag_help == True:
+                    print("""
+    This option forces the removal of the user account, even if the user is still logged in. It also forces userdel to remove the user's
+    home directory and mail spool, even if another user uses the same home directory or if the mail spool is not owned by the specified
+    user. If USERGROUPS_ENAB is defined to yes in /etc/login.defs and if a group exists with the same name as the deleted user, then this
+    group will be removed, even if it is still the primary group of another user.
+
+    Note: This option is dangerous and may leave your system in an inconsistent state.
+        
+        cfg
+        USERGROUPS_ENAB (boolean)
+            Enable setting of the umask group bits to be the same as owner bits (examples: 022 -> 002, 077 -> 007) for non-root users, if the uid
+            is the same as gid, and username is the same as the primary group name.
+
+            If set to yes, userdel will remove the user's group if it contains no more members, and useradd will create by default a group with the
+            name of the user.""")
+                
+                main_command+= " -- force "
+                
+                if str(input("User group Enable?(yes or no): ")) == "yes":
+                    main_command += "USERGROUPS_ENAB true"
+                else:
+                    main_command += "USERGROUPS_ENAB false"
+                    
+            elif user_input == 2 and flag_table["userD--remove"] == False:
+                flag_table["usrD--remove"]=True
+                
+                if flag_help == True:
+                    print("""
+    Files in the user's home directory will be removed along with the home directory itself and the user's mail spool. Files located in
+    other file systems will have to be searched for and deleted manually.
+
+    The mail spool is defined by the MAIL_DIR variable in the login.defs file.
+    
+        cfg
+        MAIL_DIR (string)
+            The mail spool directory. This is needed to manipulate the mailbox when its corresponding user account is modified or deleted. If not
+            specified, a compile-time default is used. The parameter CREATE_MAIL_SPOOL in /etc/default/useradd determines whether the mail spool
+            should be created.
+        
+        MAIL_FILE (string)
+            Defines the location of the users mail spool files relatively to their home directory.
+
+            The MAIL_DIR and MAIL_FILE variables are used by useradd, usermod, and userdel to create, move, or delete the user's mail spool.
+
+            If MAIL_CHECK_ENAB is set to yes, they are also used to define the MAIL environment variable.""")
+                    
+                main_command += " --remove " + str(input("give me the configuration: "))
+
+            elif user_input == 3 and flag_table["userD--root"] == False:
+                flag_table["usrD--root"]=True
+                
+                if flag_help == True:
+                    print("""
+    Apply changes in the CHROOT_DIR directory and use the configuration files from the CHROOT_DIR directory.""")
+                    
+                main_command +=" --root"
+
+            elif user_input == 4 and flag_table["userD--prefix"] == False:
+                flag_table["usrD--prefix"]=True
+                
+                if flag_help == True:
+                    print("""
+    Apply changes in the PREFIX_DIR directory and use the configuration files from the PREFIX_DIR directory. This option does not chroot
+    and is intended for preparing a cross-compilation target. Some limitations: NIS and LDAP users/groups are not verified. PAM
+    authentication is using the host files. No SELINUX support.""")
+                
+                main_command += " --prefix"
+
+            elif user_input == 5 and flag_table["userD--selinux-user"] == False:
+                flag_table["usrD--selinux-user"]=True
+                
+                if flag_help == True:
+                    print("""
+    Remove any SELinux user mapping for the user's login.""")
+                    
+                main_command +=" --selinux-user"
+
+            elif user_input == 0:
+                break
 
     os.system(main_command)
     
@@ -779,13 +886,11 @@ print("end")
    # -Z, --selinux-user SEUSER     new SELinux user mapping for the user account
    
 #userdel Options:
-  #-f, --force                   force removal of files, even if not owned by user
-  #-h, --help                    display this help message and exit
-  #-r, --remove                  remove home directory and mail spool
-  #-R, --root CHROOT_DIR         directory to chroot into
-  #-P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* files
-  #    --extrausers              Use the extra users database
-  #-Z, --selinux-user            remove any SELinux user mapping for the user
+  # -f, --force                   force some actions that would fail otherwise e.g. removal of user still logged in or files, even if not owned by the user
+  # -r, --remove                  remove home directory and mail spool
+  # -R, --root CHROOT_DIR         directory to chroot into
+  # -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* files
+  # -Z, --selinux-user Remove any SELinux user mapping for the user's login.
 ##################################
 # στο περίπου τρέχει ο κώδικας!!!#
 ##################################
