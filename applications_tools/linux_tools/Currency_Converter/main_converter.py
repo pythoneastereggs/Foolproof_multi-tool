@@ -1,3 +1,5 @@
+import requests 
+curr_api = "ac28563aabf28f88416d3ad591d4cf01"
 while True: 
     print("Πληκτρολόγησε 1 για Δολλάριο")
     print("Πληκτρολόγησε 2 για Ευρό")
@@ -14,6 +16,7 @@ while True:
          choice2 = input(int("Επίλεξε το νόμισμα που θέλεις να μετατρέψεις το αρχικό σου"))
          if choice2 == 1:
              print("Λάθος επιλογή")
+             
          elif choice2 == 2:
              Result = ammount*0.898230
          elif choice2 == 3:

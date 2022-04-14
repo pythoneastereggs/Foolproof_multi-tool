@@ -45,7 +45,7 @@ while True:
     ans = input("Πληκτρολόγησε Ν αν θες να συνεχίσεις ή Ο αν θες να σταματήσεις")
     if ans == "Ν":
         print("Τέλεια!")
-    elif ans == Ο:
+    elif ans == "Ο":
         break
     else:
         print("Λάθος απάντηση")
