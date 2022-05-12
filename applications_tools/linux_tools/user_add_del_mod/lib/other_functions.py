@@ -49,6 +49,6 @@ def get_all_current_processes(username):
 def kill_processes(table_of_pids):
     for i in range(len(table_of_pids)):
         if table_of_pids[i] != "PID":
-            command = "sudo kill " + str(table_of_pids[i])
+            command = "sudo kill -q 9 " + str(table_of_pids[i])
             print("command: " + command)
             os.system(command)
