@@ -17,13 +17,9 @@ def useradd(main_command, flag_table):
         
     elif user_input == 2:
         
-        print("do you want help for the commands?(1-yes(recomended), 2-no)")
-        user_input=users_inputs(1, 2)
-        if user_input == 1:
-            flag_help=True
-        elif user_input == 2:
-            flag_help=False
-        
+        print("do you want help for the commands?")
+        flag_table = user_continue()
+                
         flag_continue=True
         while flag_continue:
             

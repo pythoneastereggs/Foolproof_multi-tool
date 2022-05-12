@@ -2,16 +2,17 @@ import os
 from lib.useradd import useradd
 from lib.userdel import userdel
 from lib.usermod import usermod
-from lib.other_functions import users_inputs, user_continue
+from lib.other_functions import users_inputs, user_continue, get_all_current_processes, kill_processes
+import subprocess
 
-
-# Το tool θα χρησιμοποιηθεί για να προσθέσει να αφερέσει και να (modify) οποιονδίποτε χρήστη του συστήματος
-#   δεν παίζει ρόλο αν είναι debian ή arch το σύστημα στο οποίο θα τρέξει το προγραμμα γιατί και τα δύο συστήματα
-#   έχουν τα usermod, userdel & useradd
+###################################################################################################################
+# Το tool θα χρησιμοποιηθεί για να προσθέσει να αφερέσει και να (modify) οποιονδίποτε χρήστη του συστήματος       #
+#   δεν παίζει ρόλο αν είναι debian ή arch το σύστημα στο οποίο θα τρέξει το προγραμμα γιατί και τα δύο συστήματα #
+#   έχουν τα usermod, userdel & useradd                                                                           #
 #####################################################################################################################################
 # command in terminal: man useradd usermod & userdel αντίστοιχα (man είναι το manual για κάθε πρόγραμμα που το έχει)                #
 # ενμέρη βέβαια και ελάχειστα modified                                                                                              #
-#DESCRIPTIONS:                                                                                                                      #
+# DESCRIPTIONS:                                                                                                                      #
 #   useradd is a low level utility for adding users. On Debian, administrators should usually use adduser(8) instead.               #
 #                                                                                                                                   #
 #      When invoked without the -D option, the useradd command creates a new user account using the values specified on the command #
@@ -78,7 +79,7 @@ elif user_input == 3:
     userdel(main_command, flag_table)
     
 print("end")
-s
+
 ##################################
 # στο περίπου τρέχει ο κώδικας!!!#
 ##################################

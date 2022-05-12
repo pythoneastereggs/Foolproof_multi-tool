@@ -1,54 +1,52 @@
-from lib.other_functions import users_inputs, user_continue
+from lib.other_functions import users_inputs, user_continue, get_all_current_processes, kill_processes
 import os
+import subprocess
+
+
 def userdel(main_command, flag_table):
-    # basic command for now just a prototype for this section....
-    # AKA comming soon...
+
+    global flag_help
     main_command += "del"
-    user_name=str(input("gime a username that you want to delete from the system: "))
-    
+    user_name = str(input("gime a username that you want to delete from the system: "))
+
     print("""1- Simple account dellition
 2- Configurable account de1lition
 """)
 
-    user_input=users_inputs(1,2)
+    user_input = users_inputs(1, 2)
 
     if user_input == 1:
-        
+
         main_command += " " + user_name
 
     elif user_input == 2:
-        
-        user_input=users_inputs(1, 2)
-        if user_input == 1:
-            flag_help=True
-            print("userdel [options] LOGIN")
-        elif user_input == 2:
-            flag_help=False
 
-        print        
+        print("do you want help for the commands?")
+        flag_help = user_continue()
+        
         while True:
-            if flag_table["usrD--force"] == False:
+            if not flag_table["usrD--force"]:
                 print("1-force removal of files, even if not owned by user")
 
-            if flag_table["usrD--remove"] == False:
+            if not flag_table["usrD--remove"]:
                 print("2-remove home directory and mail spool")
 
-            if flag_table["usrD--root"] == False:
+            if not flag_table["usrD--root"]:
                 print("3-directory to chroot into")
 
-            if flag_table["usrD--prefix"] == False:
+            if not flag_table["usrD--prefix"]:
                 print("4-prefix directory where are located the /etc/* files")
 
-            if flag_table["usrD--selinux-user"] == False:
+            if not flag_table["usrD--selinux-user"]:
                 print("5-remove any SELinux user mapping for the user")
 
             print("0-exit and run the command")
 
-            user_input = users_inputs(0,5)
+            user_input = users_inputs(0, 5)
 
             if user_input == 1 and flag_table["userD--force"] == False:
-                
-                if flag_help == True:
+
+                if flag_help:
                     print("""
     This option forces the removal of the user account, even if the user is still logged in. It also forces userdel to remove the user's
     home directory and mail spool, even if another user uses the same home directory or if the mail spool is not owned by the specified
@@ -64,20 +62,20 @@ def userdel(main_command, flag_table):
 
             If set to yes, userdel will remove the user's group if it contains no more members, and useradd will create by default a group with the
             name of the user.""")
-                
-                what_to_do=user_continue()
+
+                what_to_do = user_continue()
                 if what_to_do:
                     flag_table["userD--force"] = True
-                    main_command+= " -- force "
-                
+                    main_command += " -- force "
+
                     if str(input("User group Enable?(yes or no): ")) == "yes":
                         main_command += "USERGROUPS_ENAB true"
                     else:
                         main_command += "USERGROUPS_ENAB false"
-                    
+
             elif user_input == 2 and flag_table["userD--remove"] == False:
-                
-                if flag_help == True:
+
+                if flag_help:
                     print("""
     Files in the user's home directory will be removed along with the home directory itself and the user's mail spool. Files located in
     other file systems will have to be searched for and deleted manually.
@@ -96,55 +94,56 @@ def userdel(main_command, flag_table):
             The MAIL_DIR and MAIL_FILE variables are used by useradd, usermod, and userdel to create, move, or delete the user's mail spool.
 
             If MAIL_CHECK_ENAB is set to yes, they are also used to define the MAIL environment variable.""")
-                    
-                what_to_do=user_continue()
+
+                what_to_do = user_continue()
                 if what_to_do:
-                    flag_table["usrD--remove"]=True
+                    flag_table["usrD--remove"] = True
                     main_command += " --remove " + str(input("give me the configuration: "))
 
-            elif user_input == 3 and flag_table["userD--root"] == False:
-                
-                if flag_help == True:
+            elif user_input == 3 and not flag_table["userD--root"]:
+
+                if flag_help:
                     print("""
     Apply changes in the CHROOT_DIR directory and use the configuration files from the CHROOT_DIR directory.""")
-                    
-                what_to_do=user_continue()
-                if what_to_do:
-                    flag_table["usrD--root"]=True
-                    main_command +=" --root"
 
-            elif user_input == 4 and flag_table["userD--prefix"] == False:
-                
-                if flag_help == True:
+                what_to_do = user_continue()
+                if what_to_do:
+                    flag_table["usrD--root"] = True
+                    main_command += " --root"
+
+            elif user_input == 4 and not flag_table["userD--prefix"]:
+
+                if flag_help:
                     print("""
     Apply changes in the PREFIX_DIR directory and use the configuration files from the PREFIX_DIR directory. This option does not chroot
     and is intended for preparing a cross-compilation target. Some limitations: NIS and LDAP users/groups are not verified. PAM
     authentication is using the host files. No SELINUX support.""")
-                
-                what_to_do=user_continue()
+
+                what_to_do = user_continue()
                 if what_to_do:
-                    flag_table["usrD--prefix"]=True
+                    flag_table["usrD--prefix"] = True
                     main_command += " --prefix"
 
-            elif user_input == 5 and flag_table["userD--selinux-user"] == False:
-                
-                if flag_help == True:
+            elif user_input == 5 and not flag_table["userD--selinux-user"]:
+
+                if flag_help:
                     print("""
     Remove any SELinux user mapping for the user's login.""")
 
-                what_to_do=user_continue()
-                if what_to_do:    
-                    flag_table["usrD--selinux-user"]=True
-                    main_command +=" --selinux-user"
+                what_to_do = user_continue()
+                if what_to_do:
+                    flag_table["usrD--selinux-user"] = True
+                    main_command += " --selinux-user"
 
             elif user_input == 0:
                 break
-
+            
+    kill_processes(get_all_current_processes(user_name))
     os.system(main_command)
 
-#userdel Options:
-  # -f, --force                   force some actions that would fail otherwise e.g. removal of user still logged in or files, even if not owned by the user
-  # -r, --remove                  remove home directory and mail spool
-  # -R, --root CHROOT_DIR         directory to chroot into
-  # -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* files
-  # -Z, --selinux-user Remove any SELinux user mapping for the user's login.
+# userdel Options:
+# -f, --force                   force some actions that would fail otherwise e.g. removal of user still logged in or files, even if not owned by the user
+# -r, --remove                  remove home directory and mail spool
+# -R, --root CHROOT_DIR         directory to chroot into
+# -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* files
+# -Z, --selinux-user Remove any SELinux user mapping for the user's login.
