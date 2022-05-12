@@ -29,59 +29,51 @@ def usermod(main_command, flag_table):
         if flag_table["userM--groups"] == False:
             print("7- new list of supplementary GROUPS")
         
-        if flag_table["userM--append"] == False:
-            print("""8- append the user to the supplemental GROUPS mentioned by the -G option 
-without removing the user from other groups""")
-        
         if flag_table["userM--login"] == False:
-            print("9- new value of the login name")
+            print("8- new value of the login name")
         
         if flag_table["userM--lock"] == False:
-            print("10- lock the user account")
-        
-        if flag_table["userM--move-home"] == False:
-            print("11- move contents of the home directory to the new location (use only with -d)")
-        
-        if flag_table["userM--non-unique"] == False:
-            print("12- allow using duplicate (non-unique) UID")
+            print("9- lock the user account")
         
         if flag_table["userM--password"] == False:
-            print("13- use encrypted password for the new password")
+            print("10- use encrypted password for the new password")
         
         if flag_table["userM--root"] == False:
-            print("14- directory to chroot into")
+            print("11- directory to chroot into")
         
         if flag_table["userM--prefix"] == False:
-            print("15- prefix directory where are located the /etc/* files")
+            print("12- prefix directory where are located the /etc/* files")
         
         if flag_table["userM--shell"] == False:
-            print("16- new login shell for the user account")
+            print("13- new login shell for the user account")
         
         if flag_table["userM--uid"] == False:
-            print("17- new UID for the user account")
+            print("14- new UID for the user account")
         
         if flag_table["userM--unlock"] == False:
-            print("18- unlock the user account")
+            print("15- unlock the user account")
         
         if flag_table["userM--add-subuids"] == False:
-            print("19- add range of subordinate uids")
+            print("16- add range of subordinate uids")
         
         if flag_table["userM--del-subuids"] == False:
-            print("20- remove range of subordinate uids")
+            print("17- remove range of subordinate uids")
         
         if flag_table["userM--add-subgids"] == False:
-            print("21- add range of subordinate gids")
+            print("18- add range of subordinate gids")
         
-        if flag_table["userM--del-subgids"] == False:
-            print("22- remove range of subordinate gids")
+        if flag_tabl["userM--del-subgids"] == False:
+            print("19- remove range of subordinate gids")
         
         if flag_table["userM--selinux-user"] == False:
-            print("23- new SELinux user mapping for the user account")
+            print("20- new SELinux user mapping for the user account")
         print("0- exit")
         
-        user_input = users_inputs(0,23)
+        user_input = users_inputs(0,20)
         
-        if user_input == 1 and flag_table["userM--badnames"] == False:
+        if user_input == 1:
+            break
+        elif user_input == 1 and flag_table["userM--badnames"] == False:
             if flag_help:
                 print("""Allow names that do not conform to standards.""")
                 
@@ -99,7 +91,7 @@ without removing the user from other groups""")
             if user_input:
                 
                 flag_table["userM--comment"]=True
-                main_command += ""
+                main_command += " --comment " + str(input("give me a comment for the account: "))
         
         elif user_input == 3 and flag_table["userM--home"] == False:
             if flag_help:
@@ -114,7 +106,21 @@ without removing the user from other groups""")
             if user_input:
                 
                 flag_table["userM--home"]=True
-                main_command += ""
+                print("do you want to move the content of the user's home directory[y/n]: ")
+                if flag_help:
+                    print("""
+    Help:
+        Move the content of the user's home directory to the new location. If the current home directory does not exist the new home directory will not be
+        created.
+
+        This option is only valid in combination with the -d (or --home) option.
+
+        usermod will try to adapt the ownership of the files and to copy the modes, ACL and extended attributes, but manual changes might be needed afterwards.""")
+                user_input=user_continue()
+                if user_input == "Y" or user_input == "y":
+                    flag_table["userM--move-home"] = True
+                    main_command += " --move-home"
+                main_command += " --home" + str(input("give me the new user's home directory: "))
             
         elif user_input == 4 and flag_table["userM--expiredate"] == False:
             if flag_help:
@@ -131,7 +137,7 @@ without removing the user from other groups""")
             user_iput = user_continue()
             if user_input:
                 flag_table["userM--epxiredate"]=True
-                main_command += ""
+                main_command += " --expiredate " + str(input("give me the EXPIRE_DATE: "))
                 
         elif user_input == 5 and flag_table["userM--inactive"] == False:
             if flag_help:
@@ -148,21 +154,9 @@ without removing the user from other groups""")
             if user_input:
                 
                 flag_table["userM--inactive"]=True
-                main_command += ""
+                main_command += " --inactive " + str(input("give me the number of days the user account will be disabled YYYY-MM-DD: "))
             
         elif user_input == 6 and flag_table["userM--gid"] == False:
-            if flag_help:
-                print("""
-    Help:
-        """)
-                
-            user_iput = user_continue()
-            if user_input:
-                
-                flag_table["userM--gid"]=True
-                main_command += ""
-        
-        elif user_input == 7 and flag_table["userM--groups"] == False:
             if flag_help:
                 print("""
     Help:
@@ -178,22 +172,36 @@ without removing the user from other groups""")
             user_iput = user_continue()
             if user_input:
                 
-                flag_table["userM--groups"]=True
-                main_command += ""
-            
-        elif user_input == 8 and flag_table["userM--append"] == False:
+                flag_table["userM--gid"]=True
+                main_command += " --gid " + str(input("give me the name or number of the group of the user's new initial login group: "))
+        
+        elif user_input == 7 and flag_table["userM--groups"] == False:
             if flag_help:
                 print("""
     Help:
-        Add the user to the supplementary group(s). Use only with the -G(--groups) option.""")
+        A list of supplementary groups which the user is also a member of. Each group is separated from the next by a comma, with no intervening whitespace. The
+        groups are subject to the same restrictions as the group given with the -g option.
+
+        If the user is currently a member of a group which is not listed, the user will be removed from the group. This behaviour can be changed via the -a
+        option, which appends the user to the current supplementary group list.""")
                 
             user_iput = user_continue()
             if user_input:
                 
-                flag_table["userM--append"]=True
-                main_command += ""
+                flag_table["userM--groups"]=True
+                while True:
+                    user_input = str(input(" do you want to appent the groups to the uer's account[y,n]"))
+                    if ( user_input == "y" or user_input == "Y" ) and flag_table["userM--append"] == False:
+                        main_command += " --append"
+                        break
+                    elif user_input == "n" or user_input == "N":
+                        break
+                    else:
+                        print("wrong input please try again.")
+                main_command += " --groups" + str(input("give me a list of supplementary groups (separated with a ,)"))
+
             
-        elif user_input == 9 and flag_table["userM--login"] == False:
+        elif user_input == 8 and flag_table["userM--login"] == False:
             if flag_help:
                 print("""
     Help:
@@ -204,9 +212,9 @@ without removing the user from other groups""")
             if user_input:
                 
                 flag_table["userM--login"]=True
-                main_command += ""
+                main_command += " --login " + str(input("give me the new login for the new user: "))
             
-        elif user_input == 10 and flag_table["userM--lock"] == False:
+        elif user_input == 9 and flag_table["userM--lock"] == False:
             if flag_help:
                 print("""
     Help:
@@ -214,42 +222,16 @@ without removing the user from other groups""")
 
         Note: if you wish to lock the account (not only access with a password), you should also set the EXPIRE_DATE to 1.""")
                 
+            print("the --password and --unlock will be disabled.")
             user_iput = user_continue()
-            if user_input:
+            if user_input and flag_table["userM--unlock"] == False and flag_table["userM--password"] == False:
                 
+                flag_table["userM--password"]=True
+                flag_table["userM--unlock"]=True
                 flag_table["userM--lock"]=True
-                main_command += ""
+                main_command += " --lock"
         
-        elif user_input == 11 and flag_table["userM--move-home"] == False:
-            if flag_help:
-                print("""
-    Help:
-        Move the content of the user's home directory to the new location. If the current home directory does not exist the new home directory will not be
-        created.
-
-        This option is only valid in combination with the -d (or --home) option.
-
-        usermod will try to adapt the ownership of the files and to copy the modes, ACL and extended attributes, but manual changes might be needed afterwards.""")
-                
-            user_iput = user_continue()
-            if user_input:
-                
-                flag_table["userM--move-home"]=True
-                main_command += ""
-        
-        elif user_input == 12 and flag_table["userM--non-unique"] == False:
-            if flag_help:
-                print("""
-    Help:
-        When used with the -u option, this option allows to change the user ID to a non-unique value.""")
-                
-            user_iput = user_continue()
-            if user_input:
-                
-                flag_table["userM--non-unique"]=True
-                main_command += ""
-        
-        elif user_input == 13 and flag_table["userM--password"] == False:
+        elif user_input == 10 and flag_table["userM--password"] == False:
             if flag_help:
                 print("""
     Help:
@@ -262,10 +244,17 @@ without removing the user from other groups""")
             user_iput = user_continue()
             if user_input:
                 
-                flag_table["userM--password"]=True
-                main_command += ""
+                print("the --lock and --unlock will be disabled.")
+                user_iput = user_continue()
+                if user_input and flag_table["userM--unlock"] == False and flag_table["userM--lock"] == False:
+
+
+                    flag_table["userM--unlock"]=True
+                    flag_table["userM--lock"]=True                
+                    flag_table["userM--password"]=True
+                    main_command += " --password " + str(input("give me a password: "))
         
-        elif user_input == 14 and flag_table["userM--root"] == False:
+        elif user_input == 11 and flag_table["userM--root"] == False:
             if flag_help:
                 print("""
     Help:
@@ -275,9 +264,9 @@ without removing the user from other groups""")
             if user_input:
                 
                 flag_table["userM--root"]=True
-                main_command += ""
+                main_command += " --root " + str(input("give me the CHROOT_DIR: "))
             
-        elif user_input == 15 and flag_table["userM--prefix"] == False:
+        elif user_input == 12 and flag_table["userM--prefix"] == False:
             if flag_help:
                 print("""
     Help:
@@ -289,9 +278,9 @@ without removing the user from other groups""")
             if user_input:
                 
                 flag_table["userM--prefix"]=True
-                main_command += ""
+                main_command += " --prefix " + str(input("give me the PREFIX_DIR: "))
             
-        elif user_input == 16 and flag_table["userM--shell"] == False:
+        elif user_input == 13 and flag_table["userM--shell"] == False:
             if flag_help:
                 print("""
     Help:
@@ -301,9 +290,9 @@ without removing the user from other groups""")
             if user_input:
                 
                 flag_table["userM--shell"]=True
-                main_command += ""
+                main_command += " --shell " + str(input("give me the new absolute path of the shell that will be used: "))
             
-        elif user_input == 17 and flag_table["userM--uid"] == False:
+        elif user_input == 14 and flag_table["userM--uid"] == False:
             if flag_help:
                 print("""
     Help:
@@ -323,11 +312,19 @@ without removing the user from other groups""")
                 
             user_iput = user_continue()
             if user_input:
-                
+                print("do you want to be a non unique value?")
+                if flag_help:
+                    print("""
+    Help:
+        When used with the -u option, this option allows to change the user ID to a non-unique value.""")
+                user_input = user_continue()
+                if user_input:
+                    flag_table["userM--non-unique"] = True
+                    main_command += " --non-unique "
                 flag_table["userM--uid"]=True
-                main_command += ""
+                main_command += " --uid " + str(input("give me the new user's id: "))
             
-        elif user_input == 18 and flag_table["userM--unlock"] == False:
+        elif user_input == 15 and flag_table["userM--unlock"] == False:
             if flag_help:
                 print("""
     Help:
@@ -339,10 +336,16 @@ without removing the user from other groups""")
             user_iput = user_continue()
             if user_input:
                 
-                flag_table["userM--unlock"]=True
-                main_command += ""
+                print("the --password and --lock will be disabled.")
+                user_iput = user_continue()
+                if user_input and flag_table["userM--unlock"] == False and flag_table["userM--password"] == False:
+                    
+                    flag_table["userM--password"]=True
+                    flag_table["userM--unlock"]=True
+                    flag_table["userM--lock"]=True
+                    main_command += " --unlock "
             
-        elif user_input == 19 and flag_table["userM--add-subuids"] == False:
+        elif user_input == 16 and flag_table["userM--add-subuids"] == False:
             if flag_help:
                 print("""
     Help:
@@ -356,9 +359,9 @@ without removing the user from other groups""")
             if user_input:
                 
                 flag_table["userM--add-subuids"]=True
-                main_command += ""
+                main_command += " --add-subuids " + str(input("give me the range of subordinate to add uids from the user's account FIRST-LAST: "))
             
-        elif user_input == 20 and flag_table["userM--del-subuids"] == False:
+        elif user_input == 17 and flag_table["userM--del-subuids"] == False:
             if flag_help:
                 print("""
     Help:
@@ -373,9 +376,9 @@ without removing the user from other groups""")
             if user_input:
                 
                 flag_table["userM--del-subuids"]=True
-                main_command += ""
+                main_command += " --del-subuids " + str(input("give me the range of subordinate to remove uids from the user's account FIRST-LAST: "))
             
-        elif user_input == 21 and flag_table["userM--add-subgids"] == False:
+        elif user_input == 18 and flag_table["userM--add-subgids"] == False:
             if flag_help:
                 print("""
     Help:
@@ -389,9 +392,9 @@ without removing the user from other groups""")
             if user_input:
                 
                 flag_table["userM--add-subgids"]=True
-                main_command += ""
+                main_command += " --add-subgids " + str(input("give me the range of subordinate gids to add gids from the user's account FIRST-LAST: "))
             
-        elif user_input == 22 and flag_table["userM--del-subgids"] == False:
+        elif user_input == 19 and flag_table["userM--del-subgids"] == False:
             if flag_help:
                 print("""
     Help:
@@ -406,9 +409,9 @@ without removing the user from other groups""")
             if user_input:
                 
                 flag_table["userM--del-subgids"]=True
-                main_command += ""
+                main_command += " --del-subgids " + str(input("give me the range of subordinate gids to remove uids from the user's account FIRST-LAST: "))
             
-        elif user_input == 23 and flag_table["userM--selinux-user"] == False:
+        elif user_input == 20 and flag_table["userM--selinux-user"] == False:
             if flag_help:
                 print("""
     Help:
@@ -420,7 +423,7 @@ without removing the user from other groups""")
             if user_input:
                 
                 flag_table["userM--selinux-user"]=True
-                main_command += ""
+                main_command += " --selinux-user " + str(input("give me the SELinux user mapping: "))
         
     
     kill_processes(get_all_current_processes(user_name))
