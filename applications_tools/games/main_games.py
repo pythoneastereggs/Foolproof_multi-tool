@@ -16,7 +16,7 @@ Here is what i got for you:
     5- Dice_Roller""")
     users_input = users_inputs(0,5)
     if users_input == 1:
-        os.system("python3 puzzle.py")
+        os.system("python3 $(pwd)/applications_tools/games/2048/puzzle.py")
     elif users_input == 2:
         coin_flip()
     elif users_input == 3:
