@@ -4,7 +4,7 @@
 # Hangman game
 import random
 import os
-from applications_tools.linux_tools.user_add_del_mod.lib.otherwise import user_continue
+from applications_tools.linux_tools.user_add_del_mod.lib.other_functions import user_continue
 def Hangman_game():
 
     WORDLIST_FILENAME = "words.txt"

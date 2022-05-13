@@ -24,4 +24,4 @@ Here is what i got for you:
     elif users_input == 4:
         os.system("python3 $(pwd)/applications_tools/games/Pong/Main_pong.py")
     elif users_input == 5:
-        Dice_Roller()
+        Dice_Roller
