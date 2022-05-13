@@ -4,24 +4,24 @@ import math
 
 def calculator():
     while True:
-        print("1 Πρόσθεση")
-        print("2 Αφέραιση")
-        print("3 Πολλαπλασιασμός")
-        print("4 Διαίρεση")
-        print("5 δύναμη")
-        print("6 τετραγονική ρίζα")
-        print("7 για τις ριζες δευτεροβάθμιας εξίσωσης")
-        print("8 ημίτονο")
-        print("9 συνημίτονο")
-        print("10 εφαπτομένη")
-        print("11 λογάριθμο")
-        print("12 παραγοντικό")
-        print("Επίλεξε q ή Q για έξοδο")
+        print("    1 Πρόσθεση")
+        print("    2 Αφέραιση")
+        print("    3 Πολλαπλασιασμός")
+        print("    4 Διαίρεση")
+        print("    5 δύναμη")
+        print("    6 τετραγονική ρίζα")
+        print("    7 για τις ριζες δευτεροβάθμιας εξίσωσης")
+        print("    8 ημίτονο")
+        print("    9 συνημίτονο")
+        print("    10 εφαπτομένη")
+        print("    11 λογάριθμο")
+        print("    12 παραγοντικό")
+        print("    Επίλεξε q ή Q για έξοδο")
 
-        choice = input("Επίλεξε μια πράξη")
-
-        number1 = int(input("Πληκτρολόγησε αριθμό 1: "))
-        number2 = float(input("Πληκτρολόγησε αριθμό 2: "))
+        choice = input("Επίλεξε μια πράξη: ")
+        if choice != "q" and choice != "Q":
+            number1 = int(input("Πληκτρολόγησε αριθμό 1: "))
+            number2 = float(input("Πληκτρολόγησε αριθμό 2: "))
 
         if choice == 'q' or choice == 'Q' :
             break

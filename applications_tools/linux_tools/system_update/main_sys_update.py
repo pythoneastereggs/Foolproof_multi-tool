@@ -14,8 +14,6 @@ def sys_update():
     flatpak = config.get('System_properties', 'package_manager_flatpak')
     pacman = config.get('System_properties', 'package_manager_pacman')
 
-    print("flags =", apt, snap, flatpak, pacman, based_on)
-
     if apt == "True":
         system("echo\"\" && echo \" apt updating\" && echo \"\" && sudo apt update && echo\"\" && echo \"apt upgrading\" && echo \"\" && sudo apt upgrade")
 
