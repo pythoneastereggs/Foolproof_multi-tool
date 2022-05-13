@@ -14,7 +14,7 @@ Here is what i got for you:
     3- Hangman
     4- Pong
     5- Dice_Roller""")
-    users_input = users_inputs(0,4)
+    users_input = users_inputs(0,5)
     if users_input == 1:
         os.system("python3 puzzle.py")
     elif users_input == 2:
@@ -22,6 +22,6 @@ Here is what i got for you:
     elif users_input == 3:
         Hangman_game()
     elif users_input == 4:
-        os.system("python3 $(pwd)/applications_tools/games/Pong/Main_pong.py")
+        os.system("python3 $(pwd)/applications_tools/games/Pong/Main_Pong.py")
     elif users_input == 5:
-        Dice_Roller
+        DiceRoller()
