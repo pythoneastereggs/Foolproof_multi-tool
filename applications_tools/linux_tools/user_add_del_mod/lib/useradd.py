@@ -1,14 +1,18 @@
-from lib.other_functions import users_inputs, user_continue
+from applications_tools.linux_tools.user_add_del_mod.lib.other_functions import users_inputs, user_continue
 import os
 def useradd(main_command, flag_table):
     main_command+="add" # εδώ απλός ολοκληρώνω το command useradd
+    print("\nUser Add\n")
     user_name=str(input("gime a username that you want to add to the system: "))
-    print("""1-procceed as all default
-2-manually control(???) (manual of useradd command)
+    print("""
+    1-procceed as all default
+    2-manually control(???) (manual of useradd command)
+    3-manual of user add
+    0-exit
 """)
     
-    user_input=users_inputs(1, 3)
-
+    user_input=users_inputs(0, 3)
+    
     if user_input == 1:
           
         main_command = main_command + " --shell /bin/bash --create-home --system " + user_name + " && echo'' && sudo passwd " + user_name
@@ -29,105 +33,105 @@ def useradd(main_command, flag_table):
             
             if flag_table["--badnames"] == False:
                 
-                print("1-bad names do not check for bad names")
+                print("    1-bad names do not check for bad names")
                 
             if flag_table["--base-dir"] == False:
 
-                print("2-base directory for the home directory of the new account")
+                print("    2-base directory for the home directory of the new account")
 
             if flag_table["--btrfs-subvolume-home"] == False:
 
-                print("3-use BTRFS subvolume for home directory")
+                print("    3-use BTRFS subvolume for home directory")
 
             if flag_table["--comment"] == False:
 
-                print("4-GECOS field of the new account")
+                print("    4-GECOS field of the new account")
 
             if flag_table["--home-dir"] == False:
 
-                print("5-home directory of the new account")
+                print("    5-home directory of the new account")
 
             if flag_table["--defaults"] == False:
 
-                print("6-print or change default useradd configuration")
+                print("    6-print or change default useradd configuration")
 
             if flag_table["--expiredate"] == False:
 
-                print("7-expiration date of the new account")
+                print("    7-expiration date of the new account")
 
             if flag_table["--inactive"] == False:
 
-                print("8-password inactivity period of the new account")
+                print("    8-password inactivity period of the new account")
 
             if flag_table["--gid"] == False:
 
-                print("9-name or ID of the primary group of the new account")
+                print("    9-name or ID of the primary group of the new account")
 
             if flag_table["--groups"] == False:
 
-                print("10-list of supplementary groups of the new account")
+                print("    10-list of supplementary groups of the new account")
 
             if flag_table["--skel"] == False:
 
-                print("11-use this alternative skeleton directory")
+                print("    11-use this alternative skeleton directory")
 
             if flag_table["--key"] == False:
 
-                print("12-override /etc/login.defs defaults")
+                print("    12-override /etc/login.defs defaults")
 
             if flag_table["--no-log-init"] == False:
 
-                print("13-do not add the user to the lastlog and faillog databases")
+                print("    13-do not add the user to the lastlog and faillog databases")
 
             if flag_table["--create-home"] == False:
 
-                print("14-create the user's home directory")
+                print("    14-create the user's home directory")
 
             if flag_table["--no-create-home"] == False:
 
-                print("15-do not create the user's home directory")
+                print("    15-do not create the user's home directory")
 
             if flag_table["--no-user-group"] == False:
 
-                print("16-do not create a group with the same name as the user")
+                print("    16-do not create a group with the same name as the user")
 
             if flag_table["--non-unique"] == False:
 
-                print("17-allow to create users with duplicate (non-unique) UID")
+                print("    17-allow to create users with duplicate (non-unique) UID")
 
             if flag_table["--password"] == False:
 
-                print("18-encrypted password of the new account")
+                print("    18-encrypted password of the new account")
 
             if flag_table["--system"] == False:
 
-                print("19-create a system account")
+                print("    19-create a system account")
 
             if flag_table["--root"] == False:
 
-                print("20-directory to chroot into")
+                print("    20-directory to chroot into")
 
             if flag_table["--prefix"] == False:
 
-                print("21-prefix directory where are located the /etc/* files")
+                print("    21-prefix directory where are located the /etc/* files")
 
             if flag_table["--shell"] == False:
 
-                print("22-login shell of the new account")
+                print("    22-login shell of the new account")
 
             if flag_table["--uid"] == False:
 
-                print("23-user ID of the new account")
+                print("    23-user ID of the new account")
 
             if flag_table["--user-group"] == False:
 
-                print("24-create a group with the same name as the user")
+                print("    24-create a group with the same name as the user")
 
             if flag_table["--selinux-user"] == False:
 
-                print("25-use a specific SEUSER for the SELinux user mapping")
+                print("    25-use a specific SEUSER for the SELinux user mapping")
 
-            print("0-to exit")
+            print("    0-to exit")
             
             user_input=users_inputs(0, 25)
             
@@ -231,16 +235,16 @@ def useradd(main_command, flag_table):
                         flag_continue_sec_2=True
                         while flag_continue_sec_2:
                             if flag_table["temp --base-dir"] == False:
-                                print("1-base directory for the home directory of the new account")
+                                print("    1-base directory for the home directory of the new account")
                             if flag_table["temp --expiredate"] == False:
-                                print("2-expiration date of the new account")
+                                print("    2-expiration date of the new account")
                             if flag_table["temp --inactive"] == False:
-                                print("3-password inactivity period of the new account")
+                                print("    3-password inactivity period of the new account")
                             if flag_table["temp --gid"] == False:
-                                print("4-name or ID of the primary group of the new account")
+                                print("    4-name or ID of the primary group of the new account")
                             if flag_table["temp --shell"] == False:
-                                print("5-login shell of the new account")
-                            print("0-exit")
+                                print("    5-login shell of the new account")
+                            print("    0-exit")
                             user_input=users_inputs(0,5)
 
                             if user_input == 0:
@@ -462,16 +466,17 @@ def useradd(main_command, flag_table):
 
                 if flag_help == True:
                     print("""
-    Do not add the user to the lastlog and faillog databases.
+    Help:
+        Do not add the user to the lastlog and faillog databases.
 
-    By default, the user's entries in the lastlog and faillog databases
-    are reset to avoid reusing the entry from a previously deleted
-    user.
+        By default, the user's entries in the lastlog and faillog databases
+        are reset to avoid reusing the entry from a previously deleted
+        user.
 
-    If this option is not specified, useradd will also consult the
-    variable LOG_INIT in the /etc/default/useradd if set to no the user
-    will not be added to the lastlog and faillog databases.""")
-                
+        If this option is not specified, useradd will also consult the
+        variable LOG_INIT in the /etc/default/useradd if set to no the user
+        will not be added to the lastlog and faillog databases.""")
+                    
                 what_to_do=user_continue()
                 if what_to_do:
                     flag_table.update({"--no-log-init" : True})
@@ -481,16 +486,17 @@ def useradd(main_command, flag_table):
 
                 if flag_help == True:
                     print("""
-    Create the user's home directory if it does not exist. The files
-    and directories contained in the skeleton directory (which can be
-    defined with the -k aka --skel option) will be copied to the home directory.
+    Help:
+        Create the user's home directory if it does not exist. The files
+        and directories contained in the skeleton directory (which can be
+        defined with the -k aka --skel option) will be copied to the home directory.
 
-    By default, if this option is not specified and CREATE_HOME is not
-    enabled, no home directories are created.
+        By default, if this option is not specified and CREATE_HOME is not
+        enabled, no home directories are created.
 
-    The directory where the user's home directory is created must exist
-    and have proper SELinux context and permissions. Otherwise the
-    user's home directory cannot be created or accessed.""")
+        The directory where the user's home directory is created must exist
+        and have proper SELinux context and permissions. Otherwise the
+        user's home directory cannot be created or accessed.""")
 
                 what_to_do=user_continue()
                 if what_to_do:
@@ -501,9 +507,10 @@ def useradd(main_command, flag_table):
                 
                 if flag_help == True:
                     print("""
-    Do no create the user's home directory, even if the system wide
-    setting from /etc/login.defs (CREATE_HOME) is set to yes.""")
-                
+    Help:
+        Do no create the user's home directory, even if the system wide
+        setting from /etc/login.defs (CREATE_HOME) is set to yes.""")
+                    
                 what_to_do=user_continue()
                 if what_to_do:
                     flag_table.update({"--no-create-home" : True})
@@ -513,13 +520,14 @@ def useradd(main_command, flag_table):
 
                 if flag_help == True:
                     print("""
-    Do not create a group with the same name as the user, but add the
-    user to the group specified by the -g option or by the GROUP
-    variable in /etc/default/useradd.
+    Help:
+        Do not create a group with the same name as the user, but add the
+        user to the group specified by the -g option or by the GROUP
+        variable in /etc/default/useradd.
 
-    The default behavior (if the -g, -N, and -U options are not
-    specified) is defined by the USERGROUPS_ENAB variable in
-    /etc/login.defs.""")
+        The default behavior (if the -g, -N, and -U options are not
+        specified) is defined by the USERGROUPS_ENAB variable in
+        /etc/login.defs.""")
 
                 what_to_do=user_continue()
                 if what_to_do:
@@ -530,10 +538,11 @@ def useradd(main_command, flag_table):
                 
                 if flag_help == True:
                     print("""
-    Allow the creation of a user account with a duplicate (non-unique)
-    UID.
+    Help:
+        Allow the creation of a user account with a duplicate (non-unique)
+        UID.
 
-    This option is only valid in combination with the -u aka --user-group option.""")
+        This option is only valid in combination with the -u aka --user-group option.""")
 
                 what_to_do=user_continue()
                 if what_to_do:
@@ -544,13 +553,14 @@ def useradd(main_command, flag_table):
                 
                 if flag_help == True:
                     print("""
-    The encrypted password, as returned by crypt(3). The default is to
-    disable the password.
-    Note: This option is not recommended because the password (or
-    encrypted password) will be visible by users listing the processes.
+    Help:
+        The encrypted password, as returned by crypt(3). The default is to
+        disable the password.
+        Note: This option is not recommended because the password (or
+        encrypted password) will be visible by users listing the processes.
 
-    You should make sure the password respects the system's password
-    policy.""")
+        You should make sure the password respects the system's password
+        policy.""")
                 
                 what_to_do=user_continue()
                 if what_to_do:
@@ -561,18 +571,19 @@ def useradd(main_command, flag_table):
                 
                 if flag_help == True:
                     print("""
-    Create a system account.
-    
-    System users will be created with no aging information in
-    /etc/shadow, and their numeric identifiers are chosen in the
-    SYS_UID_MIN-SYS_UID_MAX range, defined in /etc/login.defs, instead
-    of UID_MIN-UID_MAX (and their GID counterparts for the creation of
-    groups).
-    
-    Note that useradd will not create a home directory for such a user,
-    regardless of the default setting in /etc/login.defs (CREATE_HOME).
-    You have to specify the -m options if you want a home directory for
-    a system account to be created.""")
+    Help:
+        Create a system account.
+        
+        System users will be created with no aging information in
+        /etc/shadow, and their numeric identifiers are chosen in the
+        SYS_UID_MIN-SYS_UID_MAX range, defined in /etc/login.defs, instead
+        of UID_MIN-UID_MAX (and their GID counterparts for the creation of
+        groups).
+        
+        Note that useradd will not create a home directory for such a user,
+        regardless of the default setting in /etc/login.defs (CREATE_HOME).
+        You have to specify the -m options if you want a home directory for
+        a system account to be created.""")
 
                 what_to_do=user_continue()
                 if what_to_do:
@@ -583,8 +594,9 @@ def useradd(main_command, flag_table):
                 
                 if flag_help == True:
                     print("""
-    Apply changes in the CHROOT_DIR directory and use the configuration
-    files from the CHROOT_DIR directory.""") 
+    Help:
+        Apply changes in the CHROOT_DIR directory and use the configuration
+        files from the CHROOT_DIR directory.""") 
 
                 what_to_do=user_continue()
                 if what_to_do:
@@ -595,11 +607,12 @@ def useradd(main_command, flag_table):
                 
                 if flag_help == True:
                     print("""
-    Apply changes in the PREFIX_DIR directory and use the configuration
-    files from the PREFIX_DIR directory. This option does not chroot
-    and is intended for preparing a cross-compilation target. Some
-    limitations: NIS and LDAP users/groups are not verified. PAM
-    authentication is using the host files. No SELINUX support.""")
+    Help:
+        Apply changes in the PREFIX_DIR directory and use the configuration
+        files from the PREFIX_DIR directory. This option does not chroot
+        and is intended for preparing a cross-compilation target. Some
+        limitations: NIS and LDAP users/groups are not verified. PAM
+        authentication is using the host files. No SELINUX support.""")
 
                 what_to_do=user_continue()
                 if what_to_do:
@@ -610,10 +623,11 @@ def useradd(main_command, flag_table):
                 
                 if flag_help == True:
                     print("""
-    The name of the user's login shell. The default is to leave this
-    field blank, which causes the system to select the default login
-    shell specified by the SHELL variable in /etc/default/useradd, or
-    an empty string by default.""")
+    Help:
+        The name of the user's login shell. The default is to leave this
+        field blank, which causes the system to select the default login
+        shell specified by the SHELL variable in /etc/default/useradd, or
+        an empty string by default.""")
 
                 what_to_do=user_continue()
                 if what_to_do:
@@ -624,12 +638,13 @@ def useradd(main_command, flag_table):
                 
                 if flag_help == True:
                     print("""
-    The numerical value of the user's ID. This value must be unique,
-    unless the -o option is used. The value must be non-negative. The
-    default is to use the smallest ID value greater than or equal to
-    UID_MIN and greater than every other user.
+    Help:
+        The numerical value of the user's ID. This value must be unique,
+        unless the -o option is used. The value must be non-negative. The
+        default is to use the smallest ID value greater than or equal to
+        UID_MIN and greater than every other user.
 
-    See also the -r option and the UID_MAX description.""")
+        See also the -r option and the UID_MAX description.""")
 
                 what_to_do=user_continue()
                 if what_to_do:
@@ -640,12 +655,13 @@ def useradd(main_command, flag_table):
 
                 if flag_help == True:
                         print("""
-    Create a group with the same name as the user, and add the user to
-    this group.
+    Help:
+        Create a group with the same name as the user, and add the user to
+        this group.
 
-    The default behavior (if the -g, -N, and -U options are not
-    specified) is defined by the USERGROUPS_ENAB variable in
-    /etc/login.defs.""")
+        The default behavior (if the -g, -N, and -U options are not
+        specified) is defined by the USERGROUPS_ENAB variable in
+        /etc/login.defs.""")
 
                 what_to_do=user_continue()
                 if what_to_do:
@@ -656,9 +672,10 @@ def useradd(main_command, flag_table):
 
                 if flag_help == True:
                     print("""
-    The SELinux user for the user's login. The default is to leave this
-    field blank, which causes the system to select the default SELinux
-    user.""")
+    Help:
+        The SELinux user for the user's login. The default is to leave this
+        field blank, which causes the system to select the default SELinux
+        user.""")
 
                 what_to_do=user_continue()
                 if what_to_do:

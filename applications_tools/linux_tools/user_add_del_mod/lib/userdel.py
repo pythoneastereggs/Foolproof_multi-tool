@@ -1,4 +1,4 @@
-from lib.other_functions import users_inputs, user_continue, get_all_current_processes, kill_processes
+from applications_tools.linux_tools.user_add_del_mod.lib.other_functions import users_inputs, user_continue, get_all_current_processes, kill_processes
 import os
 import subprocess
 
@@ -7,6 +7,7 @@ def userdel(main_command, flag_table):
 
     global flag_help
     main_command += "del"
+    print("\nUser Delete\n")
     user_name = str(input("gime a username that you want to delete from the system: "))
 
     print("""1- Simple account dellition

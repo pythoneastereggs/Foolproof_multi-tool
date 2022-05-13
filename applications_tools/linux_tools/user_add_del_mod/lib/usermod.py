@@ -1,77 +1,78 @@
-from lib.other_functions import users_inputs, user_continue, get_all_current_processes, kill_processes
+from applications_tools.linux_tools.user_add_del_mod.lib.other_functions import users_inputs, user_continue, get_all_current_processes, kill_processes
 import os
 def usermod(main_command, flag_table):
     main_command+="mod"
+    print("\nUser modify\n")
     user_name=str(input("gime a username that you want to modify from the system: "))
 
     print("do you want help for the commands?")
     flag_help = user_continue()    
 
     while True:
-        if flag_table["usrM--badnames"] == False:
-            print("1-Allow bad names")
+        if flag_table["userM--badnames"] == False:
+            print("    1-Allow bad names")
         
         if flag_table["userM--comment"] == False:
-            print("2- New value of the GECOS field")
+            print("    2- New value of the GECOS field")
         
         if flag_table["userM--home"] == False:
-            print("3- New home directory for the user account")
+            print("    3- New home directory for the user account")
         
         if flag_table["userM--expiredate"] == False:
-            print("4- set account expiration date to EXPIRE_DATE")
+            print("    4- set account expiration date to EXPIRE_DATE")
         
         if flag_table["userM--inactive"] == False:
-            print("5- set password inactive after expiration to INACTIVE")
+            print("    5- set password inactive after expiration to INACTIVE")
         
         if flag_table["userM--gid"] == False:
-            print("6- force use GROUP as new primary group")
+            print("    6- force use GROUP as new primary group")
         
         if flag_table["userM--groups"] == False:
-            print("7- new list of supplementary GROUPS")
+            print("    7- new list of supplementary GROUPS")
         
         if flag_table["userM--login"] == False:
-            print("8- new value of the login name")
+            print("    8- new value of the login name")
         
         if flag_table["userM--lock"] == False:
-            print("9- lock the user account")
+            print("    9- lock the user account")
         
         if flag_table["userM--password"] == False:
             print("10- use encrypted password for the new password")
         
         if flag_table["userM--root"] == False:
-            print("11- directory to chroot into")
+            print("    11- directory to chroot into")
         
         if flag_table["userM--prefix"] == False:
-            print("12- prefix directory where are located the /etc/* files")
+            print("    12- prefix directory where are located the /etc/* files")
         
         if flag_table["userM--shell"] == False:
-            print("13- new login shell for the user account")
+            print("    13- new login shell for the user account")
         
         if flag_table["userM--uid"] == False:
-            print("14- new UID for the user account")
+            print("    14- new UID for the user account")
         
         if flag_table["userM--unlock"] == False:
-            print("15- unlock the user account")
+            print("    15- unlock the user account")
         
         if flag_table["userM--add-subuids"] == False:
-            print("16- add range of subordinate uids")
+            print("    16- add range of subordinate uids")
         
         if flag_table["userM--del-subuids"] == False:
-            print("17- remove range of subordinate uids")
+            print("    17- remove range of subordinate uids")
         
         if flag_table["userM--add-subgids"] == False:
-            print("18- add range of subordinate gids")
+            print("    18- add range of subordinate gids")
         
-        if flag_tabl["userM--del-subgids"] == False:
-            print("19- remove range of subordinate gids")
+        if flag_table["userM--del-subgids"] == False:
+            print("    19- remove range of subordinate gids")
         
         if flag_table["userM--selinux-user"] == False:
-            print("20- new SELinux user mapping for the user account")
-        print("0- exit")
+            print("    20- new SELinux user mapping for the user account")
+        print("    0- exit")
         
         user_input = users_inputs(0,20)
         
-        if user_input == 1:
+        if user_input == 0:
             break
         elif user_input == 1 and flag_table["userM--badnames"] == False:
             if flag_help:
@@ -425,9 +426,9 @@ def usermod(main_command, flag_table):
                 flag_table["userM--selinux-user"]=True
                 main_command += " --selinux-user " + str(input("give me the SELinux user mapping: "))
         
-    
-    kill_processes(get_all_current_processes(user_name))
-    os.system(main_command)
+    if main_command != "sudo usermod":
+        kill_processes(get_all_current_processes(user_name))
+        os.system(main_command)
 #usemod Options:
    #1 -b, --badnames                allow bad names
    #2 -c, --comment COMMENT         new value of the GECOS field
