@@ -1,9 +1,11 @@
 import os
+from applications_tools.linux_tools.user_add_del_mod.lib.other_functions import users_inputs
+
 def ssh():
     
-    command = "ping "
+    command = "ssh "
     print("""
-\n ping \n
+\n ssh \n
     1-simple ssh
     2-configurable ssh
     0-exit""")
