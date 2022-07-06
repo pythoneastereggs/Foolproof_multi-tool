@@ -95,7 +95,6 @@ def password_generator():
                 final_table+=table_special_char
             # password lenght at least 8 characters
             pass_len=pass_lenght()
-
             for i in range(pass_len):
                 password+=choice(final_table)
             print("password= ", password)
