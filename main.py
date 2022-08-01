@@ -5,7 +5,7 @@ from applications_tools.linux_tools.password_generator.main_password_generator i
 from applications_tools.linux_tools.calculator.main_calculator import calculator
 from applications_tools.linux_tools.Currency_Converter.main_converter import currency_converter
 from applications_tools.linux_tools.Web_checker.web_check import website_cheker
-from applications_tools.linux_tools.ping.ping import ping
+from applications_tools.linux_tools.ping.main_ping import ping
 from applications_tools.linux_tools.ssh.ssh import ssh
 from applications_tools.games.main_games import games
 

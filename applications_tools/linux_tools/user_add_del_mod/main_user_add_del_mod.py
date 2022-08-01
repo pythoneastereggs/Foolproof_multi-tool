@@ -53,8 +53,6 @@ def user_add_del_mod():
     main_command="sudo user"# τα useradd, userdel & usermod προαπετούν να τρέχουν σε super user (sudo ή root) για να τρέξουν και
                             # να κάνουν αλαγες στο σύστημα
 
-    print("""\n\nIn dev release does not have the users automaticly displayed(????)
-probablly in the other versions will have all the modifyable users in the modify category(???)\n\n""")
     # to be continue... jojo end music referene (anime)
     #aka https://music.youtube.com/watch?v=cPCLFtxpadE&feature=share
     while True:
