@@ -22,7 +22,7 @@ def ping():
     if users_input == 1:
         main_command += ip_or_site_to_ping
         
-    elif user_input == 2:
+    elif users_input == 2:
         options(main_command, flag_table, ip_or_site_to_ping)
         
     elif users_input == 3:

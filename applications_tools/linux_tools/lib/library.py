@@ -1,8 +1,8 @@
 import subprocess
-import os
+import os   
+from termcolor import colored
 
-
-def users_inputs(start, finish):  # general user's inputs
+def users_inputs(start, finish):
     flag_continue = True
     while flag_continue:
         user_input = int(input("gime a number [" + str(start) + "," + str(finish) + "]:"))
@@ -11,7 +11,6 @@ def users_inputs(start, finish):  # general user's inputs
         else:
             print("wrong input please try again")
     return user_input
-
 
 def user_continue():
     while True:
@@ -22,7 +21,6 @@ def user_continue():
             return True
         else:
             print("wrong input please try again")
-
 
 def get_all_current_processes(username):
     
@@ -52,3 +50,10 @@ def kill_processes(table_of_pids):
             command = "sudo kill -q 9 " + str(table_of_pids[i])
             print("command: " + command)
             os.system(command)
+
+
+def enabled_option(text):
+    print(colored(text,"green"))
+
+def disabled_option(text):
+    print(colored(text,"red"))

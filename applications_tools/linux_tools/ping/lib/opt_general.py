@@ -1,8 +1,8 @@
 import os
 import subprocess
-
 from applications_tools.linux_tools.user_add_del_mod.lib.other_functions import (
     user_continue, users_inputs)
+from termcolor import colored
 
 
 def options(main_command, flag_table, ip_or_site_to_ping):
@@ -31,8 +31,8 @@ def options(main_command, flag_table, ip_or_site_to_ping):
  # not permited/not active (red) #
 #################################
     
-    while True:                                    # red = not active / not permited
-        if not flag_table["-4"]:                   # green = active and ready to use
+    while True:                                    # disabled = red = not active / not permited
+        if not flag_table["-4"]:                   # enabled = green = active and ready to use
             print("1-\033[0;49;31m Use IPv4 only") # print red text (\003[0;49;31m {and the text})
         elif flag_table["-4"]:
             print("1-\033[0;49;32m Use IPv4 only") # print green text (\003[0;49;32m {and the text})
@@ -488,7 +488,7 @@ or received""")
     if flag_table["-M"]:
         main_command += "-M "
     if flag_table["-n"]:
-        main_command += "-n "
+        main_command += "- "
     if flag_table["-O"]:
         main_command += "-O "
     if flag_table["-p"]:
