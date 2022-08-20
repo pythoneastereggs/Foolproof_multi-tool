@@ -12,7 +12,7 @@ from applications_tools.games.main_games import games
 from applications_tools.linux_tools.user_add_del_mod.lib.other_functions import users_inputs
 
 print("\nWelcome to Fool proof Multitool\n")
-while True:
+while True:###
     print("""What do you want to do?
     1- password generate##
     2- user add, delete, modify
