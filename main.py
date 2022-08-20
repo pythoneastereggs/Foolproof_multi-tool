@@ -14,7 +14,7 @@ from applications_tools.linux_tools.user_add_del_mod.lib.other_functions import 
 print("\nWelcome to Fool proof Multitool\n")
 while True:
     print("""What do you want to do?
-    1- password generate
+    1- password generate##
     2- user add, delete, modify
     3- ping a server
     4- ssh to a server
