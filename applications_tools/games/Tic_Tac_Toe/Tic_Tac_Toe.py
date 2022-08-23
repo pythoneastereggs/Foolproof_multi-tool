@@ -1,4 +1,4 @@
-# imported from https://geekflare.com/tic-tac-toe-python-code/
+# imported and modified from https://geekflare.com/tic-tac-toe-python-code/
 
 import random
 
@@ -8,20 +8,20 @@ class TicTacToe:
     def __init__(self):
         self.board = []
 
-    def create_board(self):
+    def board_creator(self):
         for i in range(3):
             row = []
             for j in range(3):
                 row.append('-')
             self.board.append(row)
 
-    def get_random_first_player(self):
+    def random_player(self):
         return random.randint(0, 1)
 
     def fix_spot(self, row, col, player):
         self.board[row][col] = player
 
-    def is_player_win(self, player):
+    def player_win(self, player):
         win = None
 
         n = len(self.board)
@@ -70,14 +70,14 @@ class TicTacToe:
                     return False
         return True
 
-    def is_board_filled(self):
+    def board_filled(self):
         for row in self.board:
             for item in row:
                 if item == '-':
                     return False
         return True
 
-    def swap_player_turn(self, player):
+    def player_turn(self, player):
         return 'X' if player == 'O' else 'O'
 
     def show_board(self):
@@ -87,9 +87,9 @@ class TicTacToe:
             print()
 
     def start(self):
-        self.create_board()
+        self.board_creator()
 
-        player = 'X' if self.get_random_first_player() == 1 else 'O'
+        player = 'X' if self.random_player() == 1 else 'O'
         while True:
             print(f"Player {player} turn")
 
@@ -104,17 +104,17 @@ class TicTacToe:
             self.fix_spot(row - 1, col - 1, player)
 
             # checking whether current player is won or not
-            if self.is_player_win(player):
+            if self.player_win(player):
                 print(f"Player {player} wins the game!")
                 break
 
             # checking whether the game is draw or not
-            if self.is_board_filled():
+            if self.board_filled():
                 print("Match Draw!")
                 break
 
             # swapping the turn
-            player = self.swap_player_turn(player)
+            player = self.player_turn(player)
 
         # showing the final view of board
         print()
