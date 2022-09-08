@@ -1,5 +1,5 @@
 
-def currency_converter():
+def currency_converter():###
     curr_api = "ac28563aabf28f88416d3ad591d4cf01"
     while True: 
         print("Πληκτρολόγησε 1 για Δολλάριο")
