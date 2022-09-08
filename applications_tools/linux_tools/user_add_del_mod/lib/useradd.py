@@ -1,9 +1,12 @@
-from applications_tools.linux_tools.user_add_del_mod.lib.other_functions import users_inputs, user_continue
+from enum import Flag
+from applications_tools.linux_tools.g_lib.general_library import users_inputs, user_continue
 import os
+global flag_table
+
 def useradd(main_command, flag_table):
-    main_command+="add" # εδώ απλός ολοκληρώνω το command useradd
+    main_command += "add"  # εδώ απλός ολοκληρώνω το command useradd
     print("\nUser Add\n")
-    user_name=str(input("gime a username that you want to add to the system: "))
+    user_name = str(input("gime a username that you want to add to the system: "))
     print("""
     1-procceed as all default
     2-manually control(???) (manual of useradd command)
@@ -11,27 +14,27 @@ def useradd(main_command, flag_table):
     0-exit
 """)
     
-    user_input=users_inputs(0, 3)
+    user_input = users_inputs(0, 3)
     
     if user_input == 1:
           
         main_command = main_command + " --shell /bin/bash --create-home --system " + user_name + " && echo'' && sudo passwd " + user_name
-        print(main_command)# δείχνει το command που θα τρέξει στον χρήστη
-        os.system(main_command)# τρέχει το command στο terminal και δείχνει το output στον χρήστη
+        print(main_command)  # δείχνει το command που θα τρέξει στον χρήστη
+        os.system(main_command)  # τρέχει το command στο terminal και δείχνει το output στον χρήστη
         
     elif user_input == 2:
         
         print("do you want help for the commands?")
         flag_table = user_continue()
                 
-        flag_continue=True
+        flag_continue = True
         while flag_continue:
             
             # έδώ απλός ο χρήστης θα μπορέσει να χρησημοποιήσει το κάθε ένα switch μόνο μια φορά 
             
             print("What do you whant to do with this new user?\n")
             
-            if flag_table["--badnames"] == False:
+            if not flag_table["--badnames"]:
                 
                 print("    1-bad names do not check for bad names")
                 

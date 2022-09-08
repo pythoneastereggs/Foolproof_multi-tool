@@ -1,4 +1,3 @@
-import requests 
 
 def currency_converter():
     curr_api = "ac28563aabf28f88416d3ad591d4cf01"

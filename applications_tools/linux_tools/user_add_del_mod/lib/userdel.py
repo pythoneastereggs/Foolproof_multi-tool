@@ -1,6 +1,6 @@
-from applications_tools.linux_tools.user_add_del_mod.lib.other_functions import users_inputs, user_continue, get_all_current_processes, kill_processes
+from applications_tools.linux_tools.user_add_del_mod.lib.other_functions import get_all_current_processes, kill_processes
+from applications_tools.linux_tools.g_lib.general_library import users_inputs, user_continue
 import os
-import subprocess
 
 
 def userdel(main_command, flag_table):
@@ -45,7 +45,7 @@ def userdel(main_command, flag_table):
 
             user_input = users_inputs(0, 5)
 
-            if user_input == 1 and flag_table["userD--force"] == False:
+            if user_input == 1 and not flag_table["userD--force"]:
 
                 if flag_help:
                     print("""
@@ -74,7 +74,7 @@ def userdel(main_command, flag_table):
                     else:
                         main_command += "USERGROUPS_ENAB false"
 
-            elif user_input == 2 and flag_table["userD--remove"] == False:
+            elif user_input == 2 and not flag_table["userD--remove"]:
 
                 if flag_help:
                     print("""
