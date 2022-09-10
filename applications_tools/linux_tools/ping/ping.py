@@ -1,6 +1,6 @@
 import os
-import subprocess
-from applications_tools.linux_tools.user_add_del_mod.lib.other_functions import users_inputs, user_continue
+from applications_tools.linux_tools.user_add_del_mod.lib.other_functions import users_inputs
+
 
 def ping():
     command = "ping "
@@ -9,10 +9,10 @@ def ping():
     1-ping infinite
     2-configurable ping
     0-exit""")
-    users_input = users_inputs(0,2)
-    
+    users_input = users_inputs(0, 2)
+
     ip_or_site_to_ping = str(input("Give me a Site or an ip to ping: "))
-    
+
     if users_input == 1:
         command += ip_or_site_to_ping
     else:
@@ -212,9 +212,9 @@ OPTIONS
            responses, otherwise ping waits for two RTTs. Real number allowed with dot as a decimal
            separator (regardless locale setup). 0 means infinite timeout.
 Give me your options: """)) + ip_or_site_to_ping
-    
+
     os.system(command)
-    
+
     nothing = input("press enter to exit: ")
-    
+
     print("\n\n")

@@ -3,6 +3,7 @@ import os
 
 
 def users_inputs(start, finish):  # general user's inputs
+    global user_input
     flag_continue = True
     while flag_continue:
         user_input = int(input("gime a number [" + str(start) + "," + str(finish) + "]:"))
@@ -40,7 +41,7 @@ def get_all_current_processes(username):
         if i > 0:
             current_processes[i] = int(current_processes[i])
             flag = True
-        if flag == True:
+        if flag:
             print(
                 "\n current user(" + username + ") processes are fount! \n I will terminate them for the changes to take place!")
     return current_processes

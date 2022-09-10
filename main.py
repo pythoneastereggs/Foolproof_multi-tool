@@ -6,26 +6,23 @@ from applications_tools.linux_tools.calculator.main_calculator import calculator
 from applications_tools.linux_tools.Currency_Converter.main_converter import currency_converter
 from applications_tools.linux_tools.Web_checker.web_check import website_cheker
 from applications_tools.linux_tools.ping.ping import ping
-from applications_tools.linux_tools.ssh.ssh import ssh
 from applications_tools.games.main_games import games
 
-from applications_tools.linux_tools.user_add_del_mod.lib.other_functions import users_inputs
+from applications_tools.linux_tools.g_lib.general_library import users_inputs
 
 print("\nWelcome to Fool proof Multitool\n")
 while True:
     print("""What do you want to do?
-    1- password generate
+    1- password generate##
     2- user add, delete, modify
     3- ping a server
-    4- ssh to a server
     5- system update
     6- calculate staff
     7- install packages
     8- currency Converter
-    9- website cheaker
+    9- website checker
     10- games...
     0- exit""")
-    
     user_input = users_inputs(0, 10)
     if user_input == 0:
         break
@@ -35,8 +32,6 @@ while True:
         user_add_del_mod()
     elif user_input == 3:
         ping()
-    elif user_input == 4:
-        ssh()
     elif user_input == 5:
         sys_update()
     elif user_input == 6:
@@ -49,4 +44,3 @@ while True:
         website_cheker()
     elif user_input == 10:
         games()
-#test

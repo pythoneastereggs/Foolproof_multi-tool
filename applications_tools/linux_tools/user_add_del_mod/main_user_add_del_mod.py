@@ -1,11 +1,8 @@
-import os
-import subprocess
-
 def user_add_del_mod():
     from applications_tools.linux_tools.user_add_del_mod.lib.useradd import useradd
     from applications_tools.linux_tools.user_add_del_mod.lib.userdel import userdel
     from applications_tools.linux_tools.user_add_del_mod.lib.usermod import usermod
-    from applications_tools.linux_tools.user_add_del_mod.lib.other_functions import users_inputs, user_continue, get_all_current_processes, kill_processes
+    from applications_tools.linux_tools.g_lib.general_library import users_inputs
 
     ###################################################################################################################
     # Το tool θα χρησιμοποιηθεί για να προσθέσει να αφερέσει και να (modify) οποιονδίποτε χρήστη του συστήματος       #
@@ -34,29 +31,34 @@ def user_add_del_mod():
     # Μπορεί να χρειαστώ να μηδενήσω τα flags για το usermod 
     # γενικά αυτά είναι τα switches που μπορεις να έχει για τα useradd, userdel & usermod
     # προς το παρών είναι μόνο για τα useradd & userdell (aka comming soon for usermod)
-    flag_table={"--badnames" : False, "--base-dir" : False, "--btrfs-subvolume-home" : False, "--comment" : False,
-            "--home-dir" : False, "--defaults" : False, "--expiredate" : False, "--inactive" : False, "--gid" : False,
-            "--groups" : False, "--skel" : False, "--key" : False, "--no-log-init" : False, "--create-home" : False, 
-            "--no-create-home" : False, "--no-user-group" : False, "--non-unique" : False, "--password" : False, 
-            "--system" : False, "--root" : False, "--prefix" : False, "--shell" : False, "--uid" : False, 
-            "--user-group" : False, "--selinux-user" : False, "--extrausers" : False, "temp --base-dir" : False,
-            "temp --expiredate" : False, "temp --inactive" : False, "temp --gid" : False, "temp --shell" : False,
-            "userD--force" : False, "userD--remove" : False, "userD--root" : False, "userD--prefix" : False, "userD--extrausers" : False,
-            "userD--selinux-user" : False, "userM--badnames" : False, "userM--append" : False, "userM--comment" : False, "--home" : False, 
-            "userM--expiredate" : False, "userM--inactive" : False, "userM--groups" : False, "userM--login" : False,
-            "userM--move-home" : False, "userM--non-unique" : False, "userM--password" : False, "userM--remove" : False, "userM--root" : False, "userM--prefix" : False
-            , "userM--shell" : False, "userM--uid" : False, "userM--unlock" : False, "userM--add-subuids" : False, "userM--del-subuids" : False, "userM--selinux-user" : False,
-            "userM--add-subgids" :False, "userM--del-subgids" :False, "userM--comment" : False, "userM--home" : False, "userM--expiredate" : False,
-             "userM--gid" : False,"userM--lock" : False}
-    #τα flags θα τα χρησιμοποιήσω στο να εμφανίζει στο terminal τα ανάλογα switches στον χρηστη.
-        
-    main_command="sudo user"# τα useradd, userdel & usermod προαπετούν να τρέχουν σε super user (sudo ή root) για να τρέξουν και
-                            # να κάνουν αλαγες στο σύστημα
+    flag_table = {"--badnames": False, "--base-dir": False, "--btrfs-subvolume-home": False, "--comment": False,
+                  "--home-dir": False, "--defaults": False, "--expiredate": False, "--inactive": False, "--gid": False,
+                  "--groups": False, "--skel": False, "--key": False, "--no-log-init": False, "--create-home": False,
+                  "--no-create-home": False, "--no-user-group": False, "--non-unique": False, "--password": False,
+                  "--system": False, "--root": False, "--prefix": False, "--shell": False, "--uid": False,
+                  "--user-group": False, "--selinux-user": False, "--extrausers": False, "temp --base-dir": False,
+                  "temp --expiredate": False, "temp --inactive": False, "temp --gid": False, "temp --shell": False,
+                  "userD--force": False, "userD--remove": False, "userD--root": False, "userD--prefix": False,
+                  "userD--extrausers": False,
+                  "userD--selinux-user": False, "userM--badnames": False, "userM--append": False,
+                  "userM--comment": False, "--home": False,
+                  "userM--expiredate": False, "userM--inactive": False, "userM--groups": False, "userM--login": False,
+                  "userM--move-home": False, "userM--non-unique": False, "userM--password": False,
+                  "userM--remove": False, "userM--root": False, "userM--prefix": False,
+                  "userM--shell": False, "userM--uid": False, "userM--unlock": False, "userM--add-subuids": False,
+                  "userM--del-subuids": False, "userM--selinux-user": False,
+                  "userM--add-subgids": False, "userM--del-subgids": False, "userM--comment": False,
+                  "userM--home": False, "userM--expiredate": False,
+                  "userM--gid": False, "userM--lock": False}
+    # τα flags θα τα χρησιμοποιήσω στο να εμφανίζει στο terminal τα ανάλογα switches στον χρηστη.
+
+    main_command = "sudo user"  # τα useradd, userdel & usermod προαπετούν να τρέχουν σε super user (sudo ή root) για να τρέξουν και
+    # να κάνουν αλαγες στο σύστημα
 
     print("""\n\nIn dev release does not have the users automaticly displayed(????)
 probablly in the other versions will have all the modifyable users in the modify category(???)\n\n""")
     # to be continue... jojo end music referene (anime)
-    #aka https://music.youtube.com/watch?v=cPCLFtxpadE&feature=share
+    # aka https://music.youtube.com/watch?v=cPCLFtxpadE&feature=share
     while True:
         print("""
 User add, delete, modify
@@ -67,7 +69,7 @@ What you want to do?
     3-delete a user?
     0-exit the program.""")
 
-        user_input=users_inputs(0, 3)
+        user_input = users_inputs(0, 3)
 
         if user_input == 0:
             break
@@ -76,17 +78,17 @@ What you want to do?
             ################################
             # changing stracture now eachone have it's own dedicated file
             #
-            
+
             useradd(main_command, flag_table)
-                
+
         elif user_input == 2:
-            
+
             usermod(main_command, flag_table)
-            
+
         elif user_input == 3:
 
             userdel(main_command, flag_table)
-            
+
     print("exit user, add delete, modify")
 
     ##################################

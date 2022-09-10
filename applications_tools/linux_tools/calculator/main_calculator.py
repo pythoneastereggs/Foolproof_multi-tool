@@ -79,5 +79,5 @@ def calculator():
                 print("ο παραγοντικός του", ans3 , "είναι", factorial)
         else: 
             print("λάθος επιλογή")
-            
+
             
