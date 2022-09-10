@@ -17,18 +17,18 @@ class GameGrid(Frame):
         self.master.bind("<Key>", self.key_down)
 
         self.commands = {
-            c.KEY_UP: logic.up,
-            c.KEY_DOWN: logic.down,
-            c.KEY_LEFT: logic.left,
-            c.KEY_RIGHT: logic.right,
-            c.KEY_UP_ALT1: logic.up,
-            c.KEY_DOWN_ALT1: logic.down,
-            c.KEY_LEFT_ALT1: logic.left,
-            c.KEY_RIGHT_ALT1: logic.right,
-            c.KEY_UP_ALT2: logic.up,
-            c.KEY_DOWN_ALT2: logic.down,
-            c.KEY_LEFT_ALT2: logic.left,
-            c.KEY_RIGHT_ALT2: logic.right,
+            c.KEY_UP: logic.move_up,
+            c.KEY_DOWN: logic.move_down,
+            c.KEY_LEFT: logic.move_left,
+            c.KEY_RIGHT: logic.move_right,
+            c.KEY_UP_ALT1: logic.move_up,
+            c.KEY_DOWN_ALT1: logic.move_down,
+            c.KEY_LEFT_ALT1: logic.move_left,
+            c.KEY_RIGHT_ALT1: logic.move_right,
+            c.KEY_UP_ALT2: logic.move_up,
+            c.KEY_DOWN_ALT2: logic.move_down,
+            c.KEY_LEFT_ALT2: logic.move_left,
+            c.KEY_RIGHT_ALT2: logic.move_right,
         }
 
         self.cells = []
