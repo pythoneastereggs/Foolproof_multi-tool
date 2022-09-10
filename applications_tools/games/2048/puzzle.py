@@ -31,11 +31,11 @@ class GameGrid(Frame):
             c.KEY_RIGHT_ALT2: logic.right,
         }
 
-        self.grid_cells = []
+        self.cells = []
         self.init_grid()
         self.matrix = logic.new_game(c.GRID_LEN)
         self.history_matrixs = []
-        self.update_grid_cells()
+        self.cells_update()
 
         self.mainloop()
 
@@ -68,16 +68,16 @@ class GameGrid(Frame):
                     height=2)
                 t.grid()
                 grid_row.append(t)
-            self.grid_cells.append(grid_row)
+            self.cells.append(grid_row)
 
-    def update_grid_cells(self):
+    def cells_update(self):
         for i in range(c.GRID_LEN):
             for j in range(c.GRID_LEN):
                 new_number = self.matrix[i][j]
                 if new_number == 0:
-                    self.grid_cells[i][j].configure(text="",bg=c.BACKGROUND_COLOR_CELL_EMPTY)
+                    self.cells[i][j].configure(text="",bg=c.BACKGROUND_COLOR_CELL_EMPTY)
                 else:
-                    self.grid_cells[i][j].configure(
+                    self.cells[i][j].configure(
                         text=str(new_number),
                         bg=c.BACKGROUND_COLOR_DICT[new_number],
                         fg=c.CELL_COLOR_DICT[new_number]
@@ -90,7 +90,7 @@ class GameGrid(Frame):
         if key == c.KEY_QUIT: exit()
         if key == c.KEY_BACK and len(self.history_matrixs) > 1:
             self.matrix = self.history_matrixs.pop()
-            self.update_grid_cells()
+            self.cells_update()
             print('back on step total step:', len(self.history_matrixs))
         elif key in self.commands:
             self.matrix, done = self.commands[key](self.matrix)
@@ -98,13 +98,13 @@ class GameGrid(Frame):
                 self.matrix = logic.add_two(self.matrix)
                 # record last move
                 self.history_matrixs.append(self.matrix)
-                self.update_grid_cells()
+                self.cells_update()
                 if logic.game_state(self.matrix) == 'win':
-                    self.grid_cells[1][1].configure(text="You", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
-                    self.grid_cells[1][2].configure(text="Win!", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
+                    self.cells[1][1].configure(text="You", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
+                    self.cells[1][2].configure(text="Win!", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
                 if logic.game_state(self.matrix) == 'lose':
-                    self.grid_cells[1][1].configure(text="You", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
-                    self.grid_cells[1][2].configure(text="Lose!", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
+                    self.cells[1][1].configure(text="You", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
+                    self.cells[1][2].configure(text="Lose!", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
 
     def generate_next(self):
         index = (gen(), gen())
