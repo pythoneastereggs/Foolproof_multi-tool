@@ -1,5 +1,4 @@
 #
-# CS1010FC --- Programming Methodology
 #
 # Mission N Solutions
 #
