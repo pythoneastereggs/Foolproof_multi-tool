@@ -1,6 +1,3 @@
-############################################################################################
-# imported from https://github.com/jasmin-30/Hangman/blob/master/Hangman%20Game/Hangman.py #
-############################################################################################
 # Hangman game
 import random
 import os
