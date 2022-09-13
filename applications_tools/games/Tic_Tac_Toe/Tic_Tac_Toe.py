@@ -1,5 +1,3 @@
-# imported and modified from https://geekflare.com/tic-tac-toe-python-code/
-
 import random
 
 

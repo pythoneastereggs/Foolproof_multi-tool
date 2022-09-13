@@ -1,5 +1,3 @@
-#imported from https://github.com/yangshun/2048-python
-
 from tkinter import Frame, Label, CENTER
 import random
 import logic
