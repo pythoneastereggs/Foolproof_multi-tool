@@ -13,9 +13,14 @@ Here is what i got for you:
     2- Coin flip
     3- Hangman
     4- Pong
-    5- Dice_Roller""")
+    5- Dice_Roller
+    6- tic tac toe
+    0- exit""")
     users_input = users_inputs(0,5)
-    if users_input == 1:
+
+    if users_input == 0:
+        break
+    elif users_input == 1:
         os.system("python3 $(pwd)/applications_tools/games/2048/puzzle.py")
     elif users_input == 2:
         coin_flip()
@@ -25,3 +30,5 @@ Here is what i got for you:
         os.system("python3 $(pwd)/applications_tools/games/Pong/Main_Pong.py")
     elif users_input == 5:
         DiceRoller()
+    elif users_input == 6:
+        os.system("python3 $(pwd)/applications_tools/games/Tic_Tac_Toe.py")
