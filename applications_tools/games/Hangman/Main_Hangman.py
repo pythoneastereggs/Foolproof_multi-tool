@@ -5,7 +5,7 @@ from applications_tools.linux_tools.user_add_del_mod.lib.other_functions import 
 def Hangman_game():
 
     WORDLIST_FILENAME = "words.txt"
-    os.chdir(".application_tools/games/Hangman")
+    os.chdir("./applications_tools/games/Hangman")
     while True:
         def ImportWords():
             """
