@@ -16,7 +16,7 @@ Here is what i got for you:
     5- Dice_Roller
     6- tic tac toe
     0- exit""")
-    users_input = users_inputs(0,5)
+    users_input = users_inputs(0,6)
 
     if users_input == 1:
         os.system("python3 $(pwd)/applications_tools/games/2048/puzzle.py")
