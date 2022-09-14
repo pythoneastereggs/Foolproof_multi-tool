@@ -18,9 +18,7 @@ Here is what i got for you:
     0- exit""")
     users_input = users_inputs(0,5)
 
-    if users_input == 0:
-        break
-    elif users_input == 1:
+    if users_input == 1:
         os.system("python3 $(pwd)/applications_tools/games/2048/puzzle.py")
     elif users_input == 2:
         coin_flip()
